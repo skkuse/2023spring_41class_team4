@@ -1,0 +1,38 @@
+.header {
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+  gap: 500px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: row;
+}
+
+h1 {
+  color: #37447e;
+}
+
+.text {
+  color: #505f98;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.gap {
+  gap: 40px;
+}
+
+.login-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  height: 40px;
+  background: #111b47;
+  color: white;
+  border-radius: 8px;
+}
