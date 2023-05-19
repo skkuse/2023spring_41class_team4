@@ -90,6 +90,15 @@ a {
   text-decoration: none;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  padding: 100px 400px;
+}
+
 /*
 body {
   color: rgb(var(--foreground-rgb));

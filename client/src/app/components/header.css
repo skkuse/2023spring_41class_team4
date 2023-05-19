@@ -1,8 +1,8 @@
 .header {
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 4rem;
-  gap: 500px;
+  padding: 0 400px;
 }
 
 .flex-col {
@@ -10,7 +10,14 @@
   flex-direction: row;
 }
 
-h1 {
+.title {
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
   color: #37447e;
 }
 
@@ -30,7 +37,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 160px;
+  width: 128px;
   height: 40px;
   background: #111b47;
   color: white;

@@ -1,9 +1,9 @@
-import Header from "../components/header";
+import "./page.css";
 
 export default function Home() {
   return (
     <main>
-      <Header></Header>
+      <div className="content">메인 페이지 내용</div>
     </main>
   );
 }
