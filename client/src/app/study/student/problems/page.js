@@ -4,7 +4,7 @@
 export default function Student() {
   return (
     <main>
-      <div className="content">Problems</div>
+      <div>Problems</div>
     </main>
   );
 }

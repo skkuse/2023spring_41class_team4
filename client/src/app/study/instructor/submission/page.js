@@ -1,7 +1,7 @@
 import Link from "next/link";
 import "./page.css";
 
-export default function Instructor() {
+export default function Submission() {
   return (
     <main>
       <h1>xxx강사</h1>
