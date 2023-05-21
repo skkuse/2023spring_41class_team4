@@ -4,10 +4,14 @@ export default function Study() {
   return (
     <main>
       <div className="content">
-        스터디 페이지
         <p>
-          <Link href="/study/instructor">강사 페이지 링크</Link>
-          <Link href="/study/student">학생 페이지 링크</Link>
+          스터디 페이지
+        </p>
+        <p>
+          <Link href="/study/instructor"><b>강사 페이지 링크</b></Link>
+        </p>
+        <p>
+          <Link href="/study/student"><b>학생 페이지 링크</b></Link>
         </p>
       </div>
     </main>

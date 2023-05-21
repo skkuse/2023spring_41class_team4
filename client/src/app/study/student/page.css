@@ -1,0 +1,25 @@
+.line {
+    width: 100%;
+    height: 0;
+    border-bottom: 1px solid #505f98;
+}
+
+.nav {
+display: flex;
+flex-direction: row;
+align-items: center;
+height: 3rem;
+gap: 40px;
+padding: 0 40px;
+font-size: 18px;
+}
+
+.student-status {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+}
+
+.code-numbers{
+    margin-left: 40px;
+}
