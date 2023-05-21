@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import Pagination from "../../../components/paginate";
 import "./page.css";
 
 export default function Submission() {
@@ -12,6 +14,7 @@ export default function Submission() {
         <Link href="/study/instructor/student">Student Info</Link>
       </nav>
       <div className="line"></div>
+      <Pagination itemsPerPage={4}></Pagination>
     </main>
   );
 }

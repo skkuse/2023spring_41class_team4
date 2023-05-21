@@ -1,0 +1,13 @@
+li {
+  list-style: none;
+  float: left;
+  cursor: pointer;
+  padding: 6px 8px;
+  margin: 0 4px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.selected {
+  color: red;
+}
