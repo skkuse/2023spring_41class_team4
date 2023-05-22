@@ -4,6 +4,14 @@ import Pagination from "../../../components/paginate";
 import "./page.css";
 
 export default function Submission() {
+  const data = [];
+  for (let i = 1; i < 30; i++) {
+    data.push({
+      id: i,
+      title: "submission" + i,
+      date: "2023-05-22",
+    });
+  }
   return (
     <main>
       <h1>xxx강사</h1>
@@ -14,7 +22,7 @@ export default function Submission() {
         <Link href="/study/instructor/student">Student Info</Link>
       </nav>
       <div className="line"></div>
-      <Pagination itemsPerPage={4}></Pagination>
+      <Pagination itemsPerPage={10} data={data}></Pagination>
     </main>
   );
 }
