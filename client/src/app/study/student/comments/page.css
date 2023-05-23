@@ -25,11 +25,11 @@ font-size: 18px;
     color: #37447e;
 }
 
-.problem-title{
+.comment-title{
     margin-bottom: 40px;
 }
 
-.problem-table{
+.comment-table{
     border: 1px solid #ddd;
     margin-bottom: 20px;
     border-collapse: collapse;
