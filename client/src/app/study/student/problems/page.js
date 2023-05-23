@@ -5,7 +5,7 @@ export default function Student() {
   return (
     <main>
       <div>
-        <div className="problem-title"><h1>xxx 학생 추천 문제 목록</h1></div>
+        <div className="problem-title"><h1>xxx 학생 문제 목록</h1></div>
         <div className="problem-box">
           <table className="problem-table">
             <thead>

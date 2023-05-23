@@ -13,8 +13,8 @@ export default function Student() {
       </div>
       <div className="line"></div>
       <nav className="nav">
-        <Link href="/study/student/problems">문제추천</Link>
-        <Link href="/study/student/comments">코드 코멘트</Link>
+        <Link href="/study/student/problems">Problems</Link>
+        <Link href="/study/student/comments">Comments</Link>
       </nav>
       <div className="line"></div>
     </main>

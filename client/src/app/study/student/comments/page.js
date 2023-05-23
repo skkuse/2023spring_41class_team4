@@ -5,7 +5,7 @@ export default function Student() {
   return (
     <main>
       <div>
-        <div className="comment-title"><h1>xxx 학생 추천 문제 목록</h1></div>
+        <div className="comment-title"><h1>xxx 학생 코멘트 목록</h1></div>
         <div className="comment-box">
           <table className="comment-table">
             <thead>
