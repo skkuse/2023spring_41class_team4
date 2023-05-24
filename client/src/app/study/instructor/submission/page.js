@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Pagination from "../../../components/paginate";
+import Pagination from "@/app/components/paginate";
 import "./page.css";
 
 export default function Submission() {
