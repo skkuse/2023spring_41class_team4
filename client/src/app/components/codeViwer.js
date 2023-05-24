@@ -9,14 +9,12 @@ export default function codeViwer({ code, language }) {
     Prism.highlightAll();
   }, [code, language]);
   return (
-    <>
-      <div className="Code">
-        <pre>
-          <code className={"language-" + language}>
-            {code != undefined && code}
-          </code>
-        </pre>
-      </div>
-    </>
+    <div className="Code">
+      <pre>
+        <code className={"language-" + language}>
+          {code != undefined && code}
+        </code>
+      </pre>
+    </div>
   );
 }
