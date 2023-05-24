@@ -1,7 +1,7 @@
 import Link from "next/link";
 import "./page.css";
 
-export default function Student() {
+export default function Comments() {
   return (
     <main>
       <div>
