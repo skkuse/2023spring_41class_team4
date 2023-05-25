@@ -1,6 +1,8 @@
 package com.example.server.student.problem;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,18 +12,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Problem {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @Column(name = "problem_id")
     private Long id;
-
-    private int problemNumber;
 
     private String title;
 
     private String content;
 
-    public Problem(int problemNumber, String title, String content) {
-        this.problemNumber = problemNumber;
+    public Problem(Long id, String title, String content) {
+        this.id = id;
         this.title = title;
         this.content = content;
     }

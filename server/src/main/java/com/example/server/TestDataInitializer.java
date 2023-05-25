@@ -47,8 +47,8 @@ public class TestDataInitializer {
             em.persist(student3);
             em.persist(student4);
 
-            Problem problem1 = new Problem(1000, "A+B", "두 정수 A와 B를 입력받은 다음, A+B를 출력하는 프로그램을 작성하시오.");
-            Problem problem2 = new Problem(1000, "A-B", "두 정수 A와 B를 입력받은 다음, A-B를 출력하는 프로그램을 작성하시오.");
+            Problem problem1 = new Problem(1000L, "A+B", "두 정수 A와 B를 입력받은 다음, A+B를 출력하는 프로그램을 작성하시오.");
+            Problem problem2 = new Problem(1001L, "A-B", "두 정수 A와 B를 입력받은 다음, A-B를 출력하는 프로그램을 작성하시오.");
             em.persist(problem1);
             em.persist(problem2);
 

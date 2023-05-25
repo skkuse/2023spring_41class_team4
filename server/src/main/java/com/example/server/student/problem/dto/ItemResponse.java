@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ItemResponse {
 
-    int problemId;
+    Long problemId;
     String titleKo;
 }

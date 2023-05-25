@@ -38,16 +38,16 @@ public class ProblemService {
         if (suggestedProblems.isEmpty()) {
             final Page<Submission> submissions = submissionRepository.findAllByStudentId(studentId, pageable);
             final String solvedProblems = submissions.stream()
-                    .map(submission -> String.valueOf(submission.getProblem().getProblemNumber()))
+                    .map(submission -> String.valueOf(submission.getProblem().getId()))
                     .collect(Collectors.joining(" "));
 
             final Student student = studentRepository.findById(studentId)
                     .orElseThrow(() -> new RuntimeException("No Student Exist"));
-            final List<Integer> recommends = problemRecommender.recommend(solvedProblems);
+            final List<Long> recommends = problemRecommender.recommend(solvedProblems);
             recommends.forEach(recommend -> {
                 final SolvedacProblemResponse response = problemFetcher.fetch(String.valueOf(recommend));
                 final Problem problem = new Problem(recommend, response.getTitleKo(), changeToUrl(recommend));
-                if (!problemRepository.existsByProblemNumber(recommend)) {
+                if (!problemRepository.existsById(recommend)) {
                     problemRepository.save(problem);
                 }
                 suggestedProblemRepository.save(new SuggestedProblem(student, problem));
@@ -73,7 +73,7 @@ public class ProblemService {
                 .forEach(item -> {
                     final Problem problem = new Problem(item.getProblemId(), item.getTitleKo(),
                             changeToUrl(item.getProblemId()));
-                    if (!problemRepository.existsByProblemNumber(item.getProblemId())) {
+                    if (!problemRepository.existsById(item.getProblemId())) {
                         problemRepository.save(problem);
                     }
 
@@ -81,7 +81,7 @@ public class ProblemService {
                 });
     }
 
-    private String changeToUrl(int problemId) {
+    private String changeToUrl(Long problemId) {
         return BOJ_PROBLEM_URL + problemId;
     }
 }
