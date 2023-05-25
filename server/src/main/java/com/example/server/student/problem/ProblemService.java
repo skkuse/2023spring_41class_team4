@@ -2,10 +2,13 @@ package com.example.server.student.problem;
 
 import com.example.server.student.problem.dto.ProblemListResponse;
 import com.example.server.student.problem.dto.ProblemResponse;
+import com.example.server.student.problem.dto.RecommendResponse;
 import com.example.server.student.problem.dto.SolvedacResponse;
 import com.example.server.student.submission.Submission;
 import com.example.server.student.submission.SubmissionRepository;
 import com.example.server.student.user.Student;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,12 +25,24 @@ public class ProblemService {
     public static final String BOJ_PROBLEM_URL = "https://www.acmicpc.net/problem/";
 
     private final SuggestedProblemRepository suggestedProblemRepository;
+    private final ProblemRecommender problemRecommender;
     private final ProblemLoader problemLoader;
     private final ProblemRepository problemRepository;
     private final SubmissionRepository submissionRepository;
 
+
     public ProblemListResponse getProblemList(Long studentId, Pageable pageable) {
-        Page<SuggestedProblem> problems = suggestedProblemRepository.findAllByStudentId(studentId, pageable);
+        final Page<SuggestedProblem> problems = suggestedProblemRepository.findAllByStudentId(studentId, pageable);
+        if(problems.isEmpty()) {
+            final Page<Submission> submissions = submissionRepository.findAllByStudentId(studentId, pageable);
+            final String solvedProblemNumbers = submissions.stream()
+                    .map(submission -> String.valueOf(submission.getProblem().getProblemNumber()))
+                    .collect(Collectors.joining(" "));
+
+            problemRecommender.recommend(solvedProblemNumbers);
+
+            return new ProblemListResponse(suggestedProblemRepository.findAllByStudentId(studentId, pageable));
+        }
         return new ProblemListResponse(problems);
     }
 
