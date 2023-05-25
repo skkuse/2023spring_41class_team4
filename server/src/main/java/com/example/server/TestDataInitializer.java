@@ -52,18 +52,14 @@ public class TestDataInitializer {
             em.persist(problem1);
             em.persist(problem2);
 
-            SuggestedProblem suggestedProblem1 = new SuggestedProblem(student1, problem1);
-            SuggestedProblem suggestedProblem2 = new SuggestedProblem(student1, problem2);
-            SuggestedProblem suggestedProblem3 = new SuggestedProblem(student2, problem1);
-            SuggestedProblem suggestedProblem4 = new SuggestedProblem(student2, problem2);
-            SuggestedProblem suggestedProblem5 = new SuggestedProblem(student3, problem2);
-            SuggestedProblem suggestedProblem6 = new SuggestedProblem(student4, problem1);
+            SuggestedProblem suggestedProblem1 = new SuggestedProblem(student2, problem1);
+            SuggestedProblem suggestedProblem2 = new SuggestedProblem(student2, problem2);
+            SuggestedProblem suggestedProblem3 = new SuggestedProblem(student3, problem2);
+            SuggestedProblem suggestedProblem4 = new SuggestedProblem(student4, problem1);
             em.persist(suggestedProblem1);
             em.persist(suggestedProblem2);
             em.persist(suggestedProblem3);
             em.persist(suggestedProblem4);
-            em.persist(suggestedProblem5);
-            em.persist(suggestedProblem6);
 
             Submission submission1 = new Submission(student1, problem1, "python3", "print(A + B)");
             Submission submission2 = new Submission(student1, problem2, "python3", "print(A - B)");
