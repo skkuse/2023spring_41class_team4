@@ -1,7 +1,7 @@
 package com.example.server.student.problem;
 
-import com.example.server.student.problem.dto.RecommendResponse;
+import java.util.List;
 
 public interface ProblemRecommender {
-    RecommendResponse recommend(String solvedProblemNumbers);
+    List<Integer> recommend(String solvedProblemNumbers);
 }
