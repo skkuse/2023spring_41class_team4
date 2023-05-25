@@ -7,9 +7,9 @@ export default function Instructor() {
       <h1>xxx강사</h1>
       <div className="line"></div>
       <nav className="nav">
-        <Link href="/study/instructor/summary">Summary</Link>
-        <Link href="/study/instructor/submission">Submission</Link>
-        <Link href="/study/instructor/student">Student Info</Link>
+        <Link href="/study/instructor">Summary</Link>
+        <Link href="/study/instructor/submission">Submissions</Link>
+        <Link href="/study/instructor/student">Students</Link>
       </nav>
       <div className="line"></div>
     </main>

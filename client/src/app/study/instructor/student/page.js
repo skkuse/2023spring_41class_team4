@@ -3,12 +3,12 @@ import Link from "next/link";
 import Pagination from "@/app/components/paginate";
 import "./page.css";
 
-export default function Submission() {
+export default function Student() {
   const data = [];
   for (let i = 1; i < 30; i++) {
     data.push({
       id: i,
-      title: "submission" + i,
+      title: "student" + i,
       date: "2023-05-22",
     });
   }

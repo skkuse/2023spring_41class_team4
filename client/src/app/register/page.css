@@ -1,0 +1,28 @@
+.containerDiv{
+    border-color: #ffffff;
+    text-align: center;
+    align-self: center;  
+    align-items: center;
+    align-content: center;
+}
+
+.signupDiv{
+    display: flex;
+    flex-direction: row;
+    color: black;
+    text-align: center;
+    justify-content: center;
+}
+
+.classBox{
+    border-style:solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 30px;
+    margin: 20px;
+}
+
+#pageTitle {
+    text-align: center;
+    margin-bottom: 10px;
+}

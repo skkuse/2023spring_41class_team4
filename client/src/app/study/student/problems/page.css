@@ -14,30 +14,6 @@ padding: 0 40px;
 font-size: 18px;
 }
 
-.general-title {
-    display: block;
-    font-size: 2em;
-    margin-top: 0.67em;
-    margin-bottom: 0.67em;
-    margin-left: 0;
-    margin-right: 0;
-    font-weight: bold;
-    color: #37447e;
-}
-
 .problem-title{
     margin-bottom: 40px;
-}
-
-.problem-table{
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-    border-collapse: collapse;
-}
-
-th,td {
-    padding: 3px;
-    /* border: 1px solid #f9f9f9; */
-    border: 1px solid #ddd;
-    /* background-color: #f9f9f9 */
 }
