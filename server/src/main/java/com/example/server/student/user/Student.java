@@ -22,17 +22,17 @@ public class Student {
 
     private String name;
 
-    private String githubAccount;
+    private String bojId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    public Student(String email, String password, String name, String githubAccount, Teacher teacher) {
+    public Student(String email, String password, String name, String bojId, Teacher teacher) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.githubAccount = githubAccount;
+        this.bojId = bojId;
         this.teacher = teacher;
     }
 

@@ -1,6 +1,7 @@
 package com.example.server.student.user;
 
 import com.example.server.auth.CurrentUserHolder;
+import com.example.server.student.problem.ProblemService;
 import com.example.server.student.user.dto.StudentInfoResponse;
 import com.example.server.student.user.dto.StudentLoginRequest;
 import com.example.server.student.user.dto.StudentLoginResponse;
@@ -17,10 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentController {
 
     private final StudentService studentService;
+    private final ProblemService problemService;
 
     @PostMapping("/users")
     public ResponseEntity<Void> signUp(@RequestBody StudentSignUpRequest request) {
-        studentService.signUp(request.getEmail(), request.getPassword(), request.getName(), request.getGithubAccount(), request.getTeacherCode());
+        final Student student = studentService.signUp(request.getEmail(), request.getPassword(), request.getName(),
+                request.getBojId(), request.getTeacherCode());
+        problemService.load(student, request.getBojId());
         return ResponseEntity.ok().build();
     }
 

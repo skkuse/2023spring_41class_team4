@@ -8,6 +8,6 @@ public class StudentSignUpRequest {
     private String email;
     private String password;
     private String name;
-    private String githubAccount;
+    private String bojId;
     private String teacherCode;
 }

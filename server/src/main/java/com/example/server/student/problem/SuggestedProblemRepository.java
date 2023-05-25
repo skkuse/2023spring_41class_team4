@@ -11,4 +11,6 @@ public interface SuggestedProblemRepository extends JpaRepository<SuggestedProbl
     Page<SuggestedProblem> findAllByStudentId(Long studentId, Pageable pageable);
 
     Optional<SuggestedProblem> findByStudentIdAndProblemId(Long studentId, Long problemId);
+
+    boolean existsByStudentIdAndProblemId(Long studentId, Long problemId);
 }
