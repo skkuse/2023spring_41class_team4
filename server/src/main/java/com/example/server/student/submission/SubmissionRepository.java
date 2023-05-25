@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface SubmissionRepository extends JpaRepository<Submission, Long> {
 
-    @Query("select s from Submission s where s.suggestedProblem.student.id = :studentId")
+    @Query("select s from Submission s where s.student.id = :studentId")
     Page<Submission> findAllByStudentId(Long studentId, Pageable pageable);
 
-    @Query("select s from Submission s where s.suggestedProblem.student.teacher.id = :teacherId")
+    @Query("select s from Submission s where s.student.teacher.id = :teacherId")
     Page<Submission> findAllByTeacherId(Long teacherId, Pageable pageable);
 }

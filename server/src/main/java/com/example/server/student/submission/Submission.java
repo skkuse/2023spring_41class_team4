@@ -21,9 +21,13 @@ public class Submission {
     @Column(name = "submission_id")
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
+    private Student student;
+
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "suggested_problem_id")
-    private SuggestedProblem suggestedProblem;
+    @JoinColumn(name = "problem_id")
+    private Problem problem;
 
     private SubmissionStatus status;
 
@@ -39,23 +43,16 @@ public class Submission {
     @JoinColumn(name = "comment_id")
     private Comment comment;
 
-    public Submission(SuggestedProblem suggestedProblem, String language, String code) {
-        this.suggestedProblem = suggestedProblem;
+    public Submission(Student student, Problem problem, String language, String code) {
+        this.student = student;
+        this.problem = problem;
         this.status = SubmissionStatus.SOLVE;
         this.language = language;
         this.code = code;
     }
 
-    public Student getStudent() {
-        return suggestedProblem.getStudent();
-    }
-
     public Teacher getTeacher() {
-        return suggestedProblem.getStudent().getTeacher();
-    }
-
-    public Problem getProblem() {
-        return suggestedProblem.getProblem();
+        return this.student.getTeacher();
     }
 
     public void feedback(Feedback feedback) {

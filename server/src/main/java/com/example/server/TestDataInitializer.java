@@ -65,8 +65,8 @@ public class TestDataInitializer {
             em.persist(suggestedProblem5);
             em.persist(suggestedProblem6);
 
-            Submission submission1 = new Submission(suggestedProblem1, "python3", "print(A + B)");
-            Submission submission2 = new Submission(suggestedProblem2, "python3", "print(A - B)");
+            Submission submission1 = new Submission(student1, problem1, "python3", "print(A + B)");
+            Submission submission2 = new Submission(student1, problem2, "python3", "print(A - B)");
             em.persist(submission1);
             em.persist(submission2);
 
