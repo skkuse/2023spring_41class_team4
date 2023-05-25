@@ -1,7 +1,6 @@
 package com.example.server.student.submission;
 
 import com.example.server.student.problem.Problem;
-import com.example.server.student.problem.SuggestedProblem;
 import com.example.server.student.user.Student;
 import com.example.server.teacher.feedback.Feedback;
 import com.example.server.teacher.user.Teacher;

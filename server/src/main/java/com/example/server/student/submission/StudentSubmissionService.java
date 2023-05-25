@@ -1,13 +1,9 @@
 package com.example.server.student.submission;
 
-import com.example.server.student.problem.Problem;
-import com.example.server.student.problem.ProblemRepository;
 import com.example.server.student.problem.SuggestedProblem;
 import com.example.server.student.problem.SuggestedProblemRepository;
 import com.example.server.student.submission.dto.SubmissionListResponse;
 import com.example.server.student.submission.dto.SubmissionResponse;
-import com.example.server.student.user.Student;
-import com.example.server.student.user.StudentRepository;
 import com.example.server.teacher.feedback.FeedbackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

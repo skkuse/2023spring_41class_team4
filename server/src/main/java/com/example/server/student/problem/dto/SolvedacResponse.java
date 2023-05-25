@@ -1,8 +1,9 @@
 package com.example.server.student.problem.dto;
 
-import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Getter
 @NoArgsConstructor

@@ -1,7 +1,5 @@
 package com.example.server.student.problem;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.example.server.student.problem.dto.SolvedacProblemResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
