@@ -4,9 +4,12 @@ import com.theokanning.openai.OpenAiService;
 import com.theokanning.openai.completion.CompletionChoice;
 import com.theokanning.openai.completion.CompletionRequest;
 import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class ProblemRecommenderImpl implements ProblemRecommender {
 
@@ -24,11 +27,17 @@ public class ProblemRecommenderImpl implements ProblemRecommender {
 
         final CompletionChoice completionChoice = openAiService.createCompletion(request).getChoices().get(0);
         final String response = completionChoice.getText().trim();
+        log.info("Problem Recommend Response: {}", response);
 
         final List<String> recommends = List.of(response.split(","));
+        log.info("recommends: {}", recommends);
 
         return recommends.stream()
-                .map(Integer::parseInt)
+                .map(this::parse)
                 .toList();
+    }
+
+    private Integer parse(String numberString) {
+        return Integer.parseInt(numberString.replaceAll("\\s", ""));
     }
 }
