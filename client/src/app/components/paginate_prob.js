@@ -24,12 +24,12 @@ function Items({ currentItems }) {
                 {currentItems.map((item,idx) => (
                     <tr>
                         <td>{item.id}</td>
-                        <td><Link href={`study/student/problems/${item.id}`}>{item.probNo}</Link></td>
-                        <td><Link href={`study/student/problems/${item.id}`}>{item.title}</Link></td>
-                        <td><Link href={`study/student/problems/${item.id}`}>{item.info}</Link></td>
-                        <td><Link href={`study/student/problems/${item.id}`}>{item.ans}</Link></td>
-                        <td><Link href={`study/student/problems/${item.id}`}>{item.submit}</Link></td>
-                        <td><Link href={`study/student/problems/${item.id}`}>{item.ratio}</Link></td>
+                        <td><Link href={`study/student/${item.id}`}>{item.probNo}</Link></td>
+                        <td><Link href={`study/student/${item.id}`}>{item.title}</Link></td>
+                        <td><Link href={`study/student/${item.id}`}>{item.info}</Link></td>
+                        <td><Link href={`study/student/${item.id}`}>{item.ans}</Link></td>
+                        <td><Link href={`study/student/${item.id}`}>{item.submit}</Link></td>
+                        <td><Link href={`study/student/${item.id}`}>{item.ratio}</Link></td>
                     </tr>
                 ))}
             </tbody>

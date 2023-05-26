@@ -13,8 +13,8 @@ export default function Comments() {
       <h1>xxx 학생</h1>
       <div className="line"></div>
       <nav className="nav">
-        <Link href="/study/student/problems">Problem</Link>
-        <Link href="/study/student/comments">Comment</Link>
+        <Link href="/study/student">Problem</Link>
+        <Link href="/study/student/comment">Comment</Link>
       </nav>
       <div className="line"></div>
       <div>
