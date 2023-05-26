@@ -1,27 +1,32 @@
 "use client";
 import Link from "next/link";
-import Pagination from "@/app/components/paginate";
 import "./page.css";
-export default function Comments() {
+import Pagination from "../../../components/paginate_prob"
+
+export default function Problems() {
   const data = [];
-  for (let i = 1; i < 30; i++) {
+  for (let i=1;i<30;i++){
     data.push({
       id: i,
-      title: "comment " + i,
-      date: " 2023-05-22",
-    });
+      probNo: 2557,
+      title: "Hello World",
+      info: 383051,
+      ans: 948598,
+      submit: 39.534,
+      ratio: 0.3333
+    })
   }
-
   return (
     <main>
       <h1>xxx 학생</h1>
-      <div className="line"></div>      
+      <div className="line"></div>
       <nav className="nav">
         <Link href="/study/student">me</Link>
         <Link href="/study/student/problem">Problem</Link>
         <Link href="/study/student/comment">Comment</Link>
       </nav>
       <div className="line"></div>
+      <div className="gap"></div>
       <Pagination itemsPerPage={10} data={data}></Pagination>
     </main>
   );
