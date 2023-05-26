@@ -25,6 +25,7 @@ export default function Problems() {
         <Link href="/study/student/comment">Comment</Link>
       </nav>
       <div className="line"></div>
+      <div className="gap"></div>
       <Pagination itemsPerPage={10} data={data}></Pagination>
     </main>
   );
