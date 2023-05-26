@@ -26,6 +26,7 @@ public class StudentSubmissionService {
         Submission submission = submissionRepository.save(new Submission(suggestedProblem.getStudent(), suggestedProblem.getProblem(), language, content));
         suggestedProblemRepository.delete(suggestedProblem);
         feedbackService.requestFeedback(submission);
+
         return submission;
     }
 
