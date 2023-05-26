@@ -2,10 +2,22 @@ import Link from "next/link";
 import "./page.css";
 
 export default function Comments() {
+  const data = [];
+  for (let i=1;i<30;i++){
+    data.push({
+      
+    })
+  }
   return (
     <main>
+      <h1>xxx 학생</h1>
+      <div className="line"></div>
+      <nav className="nav">
+        <Link href="/study/student/problems">Problem</Link>
+        <Link href="/study/student/comments">Comment</Link>
+      </nav>
+      <div className="line"></div>
       <div>
-        <div className="comment-title"><h1>xxx 학생 코멘트 목록</h1></div>
         <div className="comment-box">
           <table className="comment-table">
             <thead>
