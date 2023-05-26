@@ -5,7 +5,7 @@
   padding: 0 400px;
 }
 
-.flex-row {
+.header-flex-row {
   display: flex;
   flex-direction: row;
 }

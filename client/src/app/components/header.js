@@ -3,8 +3,8 @@ import "./header.css";
 
 export default function Header() {
   return (
-    <div className="flex-row header">
-      <div className="flex-row gap">
+    <div className="header-flex-row header">
+      <div className="header-flex-row gap">
         <Link href="/" className="text pointer">
           Home
         </Link>
