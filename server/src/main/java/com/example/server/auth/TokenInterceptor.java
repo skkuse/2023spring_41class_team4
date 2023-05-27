@@ -1,5 +1,6 @@
 package com.example.server.auth;
 
+import com.example.server.exceptions.NotAuthorized;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +24,11 @@ public class TokenInterceptor implements HandlerInterceptor {
         CurrentUser user = tokenResolver.decode(token);
         if (request.getRequestURI().startsWith("/teacher")) {
             if (user.getType().equals(UserType.STUDENT)) {
-                throw new RuntimeException("Not Authorized");
+                throw new NotAuthorized("teacher", request.getRequestURI());
             }
         } else {
             if (user.getType().equals(UserType.TEACHER)) {
-                throw new RuntimeException("Not Authorized");
+                throw new NotAuthorized("student", request.getRequestURI());
             }
         }
 

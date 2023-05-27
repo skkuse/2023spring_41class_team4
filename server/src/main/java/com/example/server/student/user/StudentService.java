@@ -2,6 +2,9 @@ package com.example.server.student.user;
 
 import com.example.server.auth.CurrentUser;
 import com.example.server.auth.TokenResolver;
+import com.example.server.exceptions.NoStudentException;
+import com.example.server.exceptions.NoTeacherException;
+import com.example.server.exceptions.NotAuthorized;
 import com.example.server.student.user.dto.StudentInfoResponse;
 import com.example.server.student.user.dto.StudentLoginResponse;
 import com.example.server.teacher.student.dto.StudentListResponse;
@@ -25,19 +28,19 @@ public class StudentService {
 
     public Student signUp(String email, String password, String name, String githubAccount, String teacherCode) {
         Teacher teacher = teacherRepository.findByTeacherCode(teacherCode)
-                .orElseThrow(() -> new RuntimeException("No Teacher Exist"));
+                .orElseThrow(() -> new NoTeacherException(teacherCode));
         return studentRepository.save(new Student(email, password, name, githubAccount, teacher));
     }
 
     public StudentLoginResponse login(String email, String password) {
         Student student = studentRepository.findByEmailAndPassword(email, password)
-                .orElseThrow(() -> new RuntimeException("Student Not Exist"));
+                .orElseThrow(() -> new NoStudentException(email));
         return new StudentLoginResponse(tokenResolver.encode(new CurrentUser(student)));
     }
 
-    public StudentInfoResponse findMe(Long userId) {
-        Student student = studentRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Student Not Exist"));
+    public StudentInfoResponse findMe(Long studentId) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new NoStudentException(studentId));
         return new StudentInfoResponse(student);
     }
 
@@ -48,9 +51,9 @@ public class StudentService {
 
     public StudentResponse getStudent(Long teacherId, Long studentId) {
         Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new RuntimeException("No Student Exist"));
+                .orElseThrow(() -> new NoStudentException(studentId));
         if (!student.getTeacher().getId().equals(teacherId)) {
-            throw new RuntimeException("No Authorization");
+            throw new NotAuthorized("student", studentId);
         }
         return new StudentResponse(student);
     }

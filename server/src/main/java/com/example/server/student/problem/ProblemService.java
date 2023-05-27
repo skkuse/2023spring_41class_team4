@@ -1,5 +1,7 @@
 package com.example.server.student.problem;
 
+import com.example.server.exceptions.NoProblemException;
+import com.example.server.exceptions.NoStudentException;
 import com.example.server.student.problem.dto.ProblemListResponse;
 import com.example.server.student.problem.dto.ProblemResponse;
 import com.example.server.student.problem.dto.SolvedacProblemResponse;
@@ -42,7 +44,7 @@ public class ProblemService {
                     .collect(Collectors.joining(" "));
 
             final Student student = studentRepository.findById(studentId)
-                    .orElseThrow(() -> new RuntimeException("No Student Exist"));
+                    .orElseThrow(() -> new NoStudentException(studentId));
             final List<Long> recommends = problemRecommender.recommend(solvedProblems);
             recommends.forEach(recommend -> {
                 final SolvedacProblemResponse response = problemFetcher.fetch(String.valueOf(recommend));
@@ -60,7 +62,7 @@ public class ProblemService {
 
     public ProblemResponse getProblem(Long studentId, Long problemId) {
         SuggestedProblem problem = suggestedProblemRepository.findByStudentIdAndProblemId(studentId, problemId)
-                .orElseThrow(() -> new RuntimeException("No Problem Exist"));
+                .orElseThrow(() -> new NoProblemException(problemId));
         return new ProblemResponse(problem.getProblem());
     }
 

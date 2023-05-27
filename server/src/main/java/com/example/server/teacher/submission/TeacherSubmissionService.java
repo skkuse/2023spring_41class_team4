@@ -1,5 +1,7 @@
 package com.example.server.teacher.submission;
 
+import com.example.server.exceptions.NoSubmissionException;
+import com.example.server.exceptions.NotAuthorized;
 import com.example.server.student.submission.Comment;
 import com.example.server.student.submission.Submission;
 import com.example.server.student.submission.SubmissionRepository;
@@ -25,18 +27,18 @@ public class TeacherSubmissionService {
 
     public TeacherSubmissionResponse getSubmission(Long teacherId, Long submissionId) {
         Submission submission = submissionRepository.findById(submissionId)
-                .orElseThrow(() -> new RuntimeException("No Submission Exist"));
+                .orElseThrow(() -> new NoSubmissionException(submissionId));
         if (!submission.getTeacher().getId().equals(teacherId)) {
-            throw new RuntimeException("Not Authorized");
+            throw new NotAuthorized("submission", submissionId);
         }
         return new TeacherSubmissionResponse(submission);
     }
 
     public void comment(Long teacherId, Long submissionId, String content) {
         Submission submission = submissionRepository.findById(submissionId)
-                .orElseThrow(() -> new RuntimeException("No Submission Exist"));
+                .orElseThrow(() -> new NotAuthorized("submission", submissionId));
         if (!submission.getTeacher().getId().equals(teacherId)) {
-            throw new RuntimeException("Not Authorized");
+            throw new NotAuthorized("submission", submissionId);
         }
         submission.comment(new Comment(content));
     }

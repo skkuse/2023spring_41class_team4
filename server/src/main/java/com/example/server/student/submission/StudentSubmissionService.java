@@ -1,5 +1,8 @@
 package com.example.server.student.submission;
 
+import com.example.server.exceptions.NoProblemException;
+import com.example.server.exceptions.NoSubmissionException;
+import com.example.server.exceptions.NotAuthorized;
 import com.example.server.student.problem.SuggestedProblem;
 import com.example.server.student.problem.SuggestedProblemRepository;
 import com.example.server.student.submission.dto.SubmissionListResponse;
@@ -21,7 +24,7 @@ public class StudentSubmissionService {
 
     public Submission submit(Long studentId, Long problemId, String language, String content) {
         SuggestedProblem suggestedProblem = suggestedProblemRepository.findByStudentIdAndProblemId(studentId, problemId)
-                .orElseThrow(() -> new RuntimeException("No Problem Exist"));
+                .orElseThrow(() -> new NoProblemException(problemId));
 
         Submission submission = submissionRepository.save(new Submission(suggestedProblem.getStudent(), suggestedProblem.getProblem(), language, content));
         suggestedProblemRepository.delete(suggestedProblem);
@@ -36,10 +39,10 @@ public class StudentSubmissionService {
 
     public SubmissionResponse getSubmission(Long studentId, Long submissionId) {
         Submission submission = submissionRepository.findById(submissionId)
-                .orElseThrow(() -> new RuntimeException("No Submission Exist"));
+                .orElseThrow(() -> new NoSubmissionException(submissionId));
 
         if (!submission.getStudent().getId().equals(studentId)) {
-            throw new RuntimeException("Not Authorization");
+            throw new NotAuthorized("submission", submissionId);
         }
         return new SubmissionResponse(submission);
     }

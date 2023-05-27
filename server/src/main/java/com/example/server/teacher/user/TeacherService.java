@@ -2,6 +2,7 @@ package com.example.server.teacher.user;
 
 import com.example.server.auth.CurrentUser;
 import com.example.server.auth.TokenResolver;
+import com.example.server.exceptions.NoTeacherException;
 import com.example.server.teacher.user.dto.TeacherInfoResponse;
 import com.example.server.teacher.user.dto.TeacherLoginResponse;
 import lombok.RequiredArgsConstructor;
@@ -32,14 +33,14 @@ public class TeacherService {
 
     public TeacherLoginResponse login(String email, String password) {
         Teacher teacher = teacherRepository.findByEmailAndPassword(email, password)
-                .orElseThrow(() -> new RuntimeException("No Teacher Exist"));
+                .orElseThrow(() -> new NoTeacherException(email));
         return new TeacherLoginResponse(tokenResolver.encode(new CurrentUser(teacher)));
     }
 
 
     public TeacherInfoResponse findMe(Long teacherId) {
         Teacher teacher = teacherRepository.findById(teacherId)
-                .orElseThrow(() -> new RuntimeException("No Teacher Exist"));
+                .orElseThrow(() -> new NoTeacherException(teacherId));
         return new TeacherInfoResponse(teacher);
     }
 }
