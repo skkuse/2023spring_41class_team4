@@ -25,6 +25,9 @@ jobs:
             app: java@17
             options:
               ports: 8080
+              env:
+                - name: OPENAI_API_KEY
+                  value: ${{ secrets.OPENAI_API_KEY }}
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
