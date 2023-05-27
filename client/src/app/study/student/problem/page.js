@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import "./page.css";
-import Pagination from "../../components/paginate_prob"
+import Pagination from "../../../components/paginate_prob"
 
 export default function Problems() {
   const data = [];
@@ -21,18 +21,13 @@ export default function Problems() {
       <h1>xxx 학생</h1>
       <div className="line"></div>
       <nav className="nav">
-        <Link href="/study/student/me">me</Link>
+        <Link href="/study/student">me</Link>
         <Link href="/study/student/problem">Problem</Link>
         <Link href="/study/student/comment">Comment</Link>
       </nav>
       <div className="line"></div>
       <div className="gap"></div>
-      <div>
-        <p>id: 1</p>
-        <p>name: Student1</p>
-        <p>email Student@gmail.com</p>
-        <p>teacher: Teacher1</p>
-      </div>
+      <Pagination itemsPerPage={10} data={data}></Pagination>
     </main>
   );
 }
