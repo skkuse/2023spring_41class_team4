@@ -45,13 +45,18 @@ int main(){
     <main>
       <div className="student-status">
         <h1>xxx 학생</h1>
-        <div className="flex-row">
-          <div>
-            <CodeViwer code={code} language={"cpp"}></CodeViwer>
+        <div className="flex-col margin-top">
+          <div className="flex-col margin-top">
+            <h1>Code</h1>
+            <div>
+              <CodeViwer code={code} language={"cpp"}></CodeViwer>
+            </div>
           </div>
-          <div className="flex-col">
+          <div className="flex-col margin-top">
             <h1>ChatGPT Feedback</h1>
-            <Radar data={data}></Radar>
+            <div style={{ width: "300px", height: "300px" }}>
+              <Radar data={data}></Radar>
+            </div>
           </div>
         </div>
       </div>

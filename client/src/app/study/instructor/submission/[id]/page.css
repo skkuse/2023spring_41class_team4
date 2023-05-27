@@ -1,8 +1,16 @@
 .flex-row {
   display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 60px;
 }
 
 .flex-col {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+}
+
+.margin-top {
+  margin-top: 40px;
 }
