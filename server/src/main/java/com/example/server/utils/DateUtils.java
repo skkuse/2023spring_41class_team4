@@ -2,11 +2,12 @@ package com.example.server.utils;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DateUtils {
 
     public static String formattedDate(LocalDateTime dateTime) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return formatter.format(dateTime);
     }
 }
