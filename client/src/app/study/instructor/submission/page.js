@@ -22,7 +22,11 @@ export default function Submission() {
         <Link href="/study/instructor/student">Students</Link>
       </nav>
       <div className="line"></div>
-      <Pagination itemsPerPage={10} data={data}></Pagination>
+      <Pagination
+        itemsPerPage={10}
+        data={data}
+        listItemOption={"submission"}
+      ></Pagination>
     </main>
   );
 }

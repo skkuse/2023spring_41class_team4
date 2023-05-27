@@ -5,7 +5,7 @@ import "./paginate.css";
 
 // Example items, to simulate fetching from another resources.
 
-function Items({ currentItems }) {
+function SubmissionItems({ currentItems }) {
   return (
     <div className="items-container">
       {currentItems &&
@@ -22,7 +22,21 @@ function Items({ currentItems }) {
   );
 }
 
-export default function PaginatedItems({ itemsPerPage, data }) {
+function StudentItems({ currentItems }) {
+  return (
+    <div className="items-container">
+      {currentItems &&
+        currentItems.map((item) => (
+          <Link href={`/study/instructor/student/${item.id}`} className="item">
+            {item.title}
+            {item.date}
+          </Link>
+        ))}
+    </div>
+  );
+}
+
+export default function PaginatedItems({ itemsPerPage, data, listItemOption }) {
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
@@ -46,7 +60,11 @@ export default function PaginatedItems({ itemsPerPage, data }) {
 
   return (
     <div id="container">
-      <Items currentItems={currentItems} />
+      {listItemOption == "submission" ? (
+        <SubmissionItems currentItems={currentItems} />
+      ) : (
+        <StudentItems currentItems={currentItems} />
+      )}
       <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
