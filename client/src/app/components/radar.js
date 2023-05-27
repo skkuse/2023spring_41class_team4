@@ -9,11 +9,5 @@ import {
 
 export default function Radar({ data }) {
   ChartJS.register(LineElement, PointElement, LinearScale, RadialLinearScale);
-  return (
-    <Chart
-      style={{ width: "400px", height: "400px" }}
-      type="radar"
-      data={data}
-    ></Chart>
-  );
+  return <Chart type="radar" data={data}></Chart>;
 }
