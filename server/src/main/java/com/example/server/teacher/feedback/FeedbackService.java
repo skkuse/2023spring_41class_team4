@@ -4,5 +4,5 @@ import com.example.server.student.submission.Submission;
 
 public interface FeedbackService {
 
-    void requestFeedback(Submission submission);
+    Feedback requestFeedback(Submission submission);
 }

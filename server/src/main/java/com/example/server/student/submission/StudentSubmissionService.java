@@ -7,6 +7,7 @@ import com.example.server.student.problem.SuggestedProblem;
 import com.example.server.student.problem.SuggestedProblemRepository;
 import com.example.server.student.submission.dto.SubmissionListResponse;
 import com.example.server.student.submission.dto.SubmissionResponse;
+import com.example.server.teacher.feedback.Feedback;
 import com.example.server.teacher.feedback.FeedbackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +29,8 @@ public class StudentSubmissionService {
 
         Submission submission = submissionRepository.save(new Submission(suggestedProblem.getStudent(), suggestedProblem.getProblem(), language, content));
         suggestedProblemRepository.delete(suggestedProblem);
-        feedbackService.requestFeedback(submission);
+        Feedback feedback = feedbackService.requestFeedback(submission);
+        submission.feedback(feedback);
 
         return submission;
     }

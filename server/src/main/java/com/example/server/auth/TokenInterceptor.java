@@ -1,5 +1,6 @@
 package com.example.server.auth;
 
+import com.example.server.exceptions.NotAuthenticated;
 import com.example.server.exceptions.NotAuthorized;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,6 +20,9 @@ public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader(TOKEN_NAME);
+        if (token == null) {
+            throw new NotAuthenticated(request.getRequestURI());
+        }
         log.info("Token: {}", token);
 
         CurrentUser user = tokenResolver.decode(token);
@@ -34,5 +38,10 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         CurrentUserHolder.set(user);
         return true;
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        CurrentUserHolder.clear();
     }
 }

@@ -2,9 +2,6 @@ package com.example.server.teacher.feedback;
 
 import com.example.server.student.submission.Submission;
 import com.example.server.teacher.feedback.dto.OpenAiAPIResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +12,10 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -31,7 +32,7 @@ public class SimpleFeedbackService implements FeedbackService {
     private final FeedbackRepository feedbackRepository;
 
     @Override
-    public void requestFeedback(Submission submission) {
+    public Feedback requestFeedback(Submission submission) {
         final String code = submission.getCode();
 
         final String overview = openAiResponse(code + "이 코드에 대해 피드백해줘");
@@ -51,7 +52,7 @@ public class SimpleFeedbackService implements FeedbackService {
 
         log.info("Problem Achievement Response: {}", achievement);
 
-        submission.feedback(feedbackRepository.save(new Feedback(overview, parseFromAchievement(achievement))));
+        return new Feedback(overview, parseFromAchievement(achievement));
     }
 
     private Achievement parseFromAchievement(String achievement) {

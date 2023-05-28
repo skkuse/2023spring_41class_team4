@@ -2,7 +2,6 @@ package com.example.server.exceptions;
 
 import com.example.server.utils.DateUtils;
 import lombok.Getter;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +27,16 @@ public class ExceptionResponseAdvice {
     @ExceptionHandler(NotAuthenticated.class)
     public ResponseEntity<ExceptionResponse> notAuthorizedResponse(NotAuthenticated exception) {
         return new ResponseEntity<>(new ExceptionResponse(exception), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(ProblemLoadException.class)
+    public ResponseEntity<ExceptionResponse> notAuthorizedResponse(ProblemLoadException exception) {
+        return new ResponseEntity<>(new ExceptionResponse(exception), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(DuplicateException.class)
+    public ResponseEntity<ExceptionResponse> notAuthorizedResponse(DuplicateException exception) {
+        return new ResponseEntity<>(new ExceptionResponse(exception), HttpStatus.CONFLICT);
     }
 
     @Getter
