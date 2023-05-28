@@ -26,10 +26,10 @@ public class StudentService {
     private final TeacherRepository teacherRepository;
     private final TokenResolver tokenResolver;
 
-    public Student signUp(String email, String password, String name, String githubAccount, String teacherCode) {
+    public Student signUp(String email, String password, String name, String bojId, String teacherCode) {
         Teacher teacher = teacherRepository.findByTeacherCode(teacherCode)
                 .orElseThrow(() -> new NoTeacherException(teacherCode));
-        return studentRepository.save(new Student(email, password, name, githubAccount, teacher));
+        return studentRepository.save(new Student(email, password, name, bojId, teacher));
     }
 
     public StudentLoginResponse login(String email, String password) {

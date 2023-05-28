@@ -24,10 +24,12 @@ public class ProblemListResponse {
 
         private Long id;
         private String title;
+        private String link;
 
         public ProblemElement(Problem problem) {
             this.id = problem.getId();
             this.title = problem.getTitle();
+            this.link = problem.getContent();
         }
     }
 }

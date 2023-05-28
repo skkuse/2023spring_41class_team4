@@ -11,10 +11,12 @@ import com.example.server.teacher.user.Teacher;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Profile("!test")
 @RequiredArgsConstructor
 public class TestDataInitializer {
 
@@ -38,10 +40,10 @@ public class TestDataInitializer {
             em.persist(teacher1);
             em.persist(teacher2);
 
-            Student student1 = new Student("student1@email.com", "password", "student1", "student1", teacher1);
-            Student student2 = new Student("student2@email.com", "password", "student2", "student2", teacher1);
-            Student student3 = new Student("student3@email.com", "password", "student3", "student3", teacher2);
-            Student student4 = new Student("student4@email.com", "password", "student4", "student4", teacher2);
+            Student student1 = new Student("student1@email.com", "password", "student1", "yw1221", teacher1);
+            Student student2 = new Student("student2@email.com", "password", "student2", "yw1221", teacher1);
+            Student student3 = new Student("student3@email.com", "password", "student3", "yw1221", teacher2);
+            Student student4 = new Student("student4@email.com", "password", "student4", "yw1221", teacher2);
             em.persist(student1);
             em.persist(student2);
             em.persist(student3);
