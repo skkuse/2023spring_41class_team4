@@ -1,20 +1,10 @@
 spring:
-  profiles:
-    active: local
   data:
     web:
       pageable:
         one-indexed-parameters: true
   openai:
     api-key: ${OPENAI_API_KEY}
-
----
-
-
-spring:
-  config:
-    activate:
-      on-profile: local
   datasource:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
     driver-class-name: org.h2.Driver
@@ -27,23 +17,7 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: create-drop
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: prod
-
-  datasource:
-    url: jdbc:mariadb://mariadb:3306/codemy?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&character_set_server=utf8mb4
-    driver-class-name: org.mariadb.jdbc.Driver
-    username: root
-    password: 0000
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-    hibernate:
-      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
