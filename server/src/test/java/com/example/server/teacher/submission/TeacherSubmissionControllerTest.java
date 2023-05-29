@@ -79,6 +79,26 @@ class TeacherSubmissionControllerTest {
     }
 
     @Test
+    @DisplayName("학생들이 제출한 답안 목록을 조회한다.")
+    void getSubmissionsByStudent() throws Exception {
+        Teacher teacher = teacherRepository.save(new Teacher("teacher@gmail.com", "password", "teacher", "11111111"));
+        Student student = studentRepository.save(new Student("student@gmail.com", "password", "student", "student", teacher));
+        String token = tokenResolver.encode(new CurrentUser(teacher));
+
+        Problem problem1 = problemRepository.save(new Problem(1000L, "A+B", "A+B"));
+        Problem problem2 = problemRepository.save(new Problem(1001L, "A-B", "A-B"));
+
+        Submission submission1 = submissionRepository.save(new Submission(student, problem1, "python3", "a+b"));
+        Submission submission2 = submissionRepository.save(new Submission(student, problem2, "python3", "a-b"));
+
+        mvc.perform(get("/teacher/submissions/students/{studentId}", student.getId())
+                        .header("X-Auth-Token", token))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.submissions[0].id").value(submission1.getId()))
+                .andExpect(jsonPath("$.submissions[1].id").value(submission2.getId()));
+    }
+
+    @Test
     @DisplayName("학생이 제출한 답안을 조회한다.")
     void getSubmission() throws Exception {
         Teacher teacher = teacherRepository.save(new Teacher("teacher@gmail.com", "password", "teacher", "11111111"));
