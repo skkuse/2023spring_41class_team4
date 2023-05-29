@@ -6,21 +6,15 @@ import Pagination from "@/app/components/paginate";
 import "./page.css";
 
 export default function Submission() {
-  axios.defaults.withCredentials = true;
   useEffect(() => {
     async function getInfo() {
-      const res = await axios.get(
-        "/api/teacher/me",
-        {
-          headers: {
-            "X-Auth-Token": "TEACHER2",
-          },
+      const res = await axios.get("/api/teacher/me", {
+        headers: {
+          "X-Auth-Token": "TEACHER1",
         },
-        { withCredentials: true }
-      );
+      });
       console.log(res.data);
     }
-    console.log("test");
     getInfo();
   }, []);
   const data = [];
