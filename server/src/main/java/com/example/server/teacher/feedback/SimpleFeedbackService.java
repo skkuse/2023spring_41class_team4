@@ -2,9 +2,7 @@ package com.example.server.teacher.feedback;
 
 import com.example.server.student.submission.Submission;
 import com.example.server.teacher.feedback.dto.OpenAiAPIResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,9 +10,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -30,8 +33,9 @@ public class SimpleFeedbackService implements FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
 
+    @Async("threadPoolTaskExecutor")
     @Override
-    public void requestFeedback(Submission submission) {
+    public CompletableFuture<Feedback> requestFeedback(Submission submission) {
         final String code = submission.getCode();
 
         final String overview = openAiResponse(code + "이 코드에 대해 피드백해줘");
@@ -51,7 +55,7 @@ public class SimpleFeedbackService implements FeedbackService {
 
         log.info("Problem Achievement Response: {}", achievement);
 
-        submission.feedback(feedbackRepository.save(new Feedback(overview, parseFromAchievement(achievement))));
+        return CompletableFuture.completedFuture(new Feedback(overview, parseFromAchievement(achievement)));
     }
 
     private Achievement parseFromAchievement(String achievement) {

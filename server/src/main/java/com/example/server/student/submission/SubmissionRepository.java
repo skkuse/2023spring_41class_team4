@@ -12,4 +12,7 @@ public interface SubmissionRepository extends JpaRepository<Submission, Long> {
 
     @Query("select s from Submission s where s.student.teacher.id = :teacherId")
     Page<Submission> findAllByTeacherId(Long teacherId, Pageable pageable);
+
+    @Query("select s from Submission s where s.student.teacher.id = :teacherId and s.student.id = :studentId")
+    Page<Submission> findAllByTeacherIdAndStudentId(Long teacherId, Long studentId, Pageable pageable);
 }

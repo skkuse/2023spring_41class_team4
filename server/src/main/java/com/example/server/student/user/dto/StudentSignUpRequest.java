@@ -1,8 +1,10 @@
 package com.example.server.student.user.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class StudentSignUpRequest {
 
     private String email;

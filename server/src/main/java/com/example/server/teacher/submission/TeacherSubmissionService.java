@@ -25,6 +25,12 @@ public class TeacherSubmissionService {
         return new SubmissionListResponse(submissions);
     }
 
+    public SubmissionListResponse getSubmissionsByStudent(Long teacherId, Long studentId, Pageable pageable) {
+        Page<Submission> submissions = submissionRepository.findAllByTeacherIdAndStudentId(teacherId, studentId,
+                pageable);
+        return new SubmissionListResponse(submissions);
+    }
+
     public TeacherSubmissionResponse getSubmission(Long teacherId, Long submissionId) {
         Submission submission = submissionRepository.findById(submissionId)
                 .orElseThrow(() -> new NoSubmissionException(submissionId));

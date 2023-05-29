@@ -2,6 +2,7 @@ package com.example.server.student.user;
 
 import com.example.server.auth.CurrentUser;
 import com.example.server.auth.TokenResolver;
+import com.example.server.exceptions.DuplicateStudentException;
 import com.example.server.exceptions.NoStudentException;
 import com.example.server.exceptions.NoTeacherException;
 import com.example.server.exceptions.NotAuthorized;
@@ -12,6 +13,7 @@ import com.example.server.teacher.student.dto.StudentResponse;
 import com.example.server.teacher.user.Teacher;
 import com.example.server.teacher.user.TeacherRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,7 +31,11 @@ public class StudentService {
     public Student signUp(String email, String password, String name, String bojId, String teacherCode) {
         Teacher teacher = teacherRepository.findByTeacherCode(teacherCode)
                 .orElseThrow(() -> new NoTeacherException(teacherCode));
-        return studentRepository.save(new Student(email, password, name, bojId, teacher));
+        try {
+            return studentRepository.save(new Student(email, password, name, bojId, teacher));
+        } catch (DataIntegrityViolationException e) {
+            throw new DuplicateStudentException(email);
+        }
     }
 
     public StudentLoginResponse login(String email, String password) {

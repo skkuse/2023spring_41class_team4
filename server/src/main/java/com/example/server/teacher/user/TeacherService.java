@@ -2,10 +2,12 @@ package com.example.server.teacher.user;
 
 import com.example.server.auth.CurrentUser;
 import com.example.server.auth.TokenResolver;
+import com.example.server.exceptions.DuplicateTeacherException;
 import com.example.server.exceptions.NoTeacherException;
 import com.example.server.teacher.user.dto.TeacherInfoResponse;
 import com.example.server.teacher.user.dto.TeacherLoginResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +22,11 @@ public class TeacherService {
     private final TokenResolver tokenResolver;
 
     public void signUp(String email, String password, String name) {
-        teacherRepository.save(new Teacher(email, password, name, createTeacherCode()));
+        try {
+            teacherRepository.save(new Teacher(email, password, name, createTeacherCode()));
+        } catch (DataIntegrityViolationException e) {
+            throw new DuplicateTeacherException(email);
+        }
     }
 
     private String createTeacherCode() {

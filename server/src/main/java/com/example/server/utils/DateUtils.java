@@ -1,6 +1,5 @@
 package com.example.server.utils;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
