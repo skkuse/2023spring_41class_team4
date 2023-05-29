@@ -15,6 +15,7 @@ import com.example.server.teacher.feedback.FeedbackService;
 import com.example.server.teacher.user.Teacher;
 import com.example.server.teacher.user.TeacherRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.concurrent.CompletableFuture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -153,7 +154,7 @@ class StudentSubmissionControllerTest {
         SuggestedProblem suggestedProblem = suggestedProblemRepository.save(new SuggestedProblem(student, problem));
 
         Feedback feedback = new Feedback("Feedback", new Achievement());
-        given(feedbackService.requestFeedback(any())).willReturn(feedback);
+        given(feedbackService.requestFeedback(any())).willReturn(CompletableFuture.completedFuture(feedback));
 
         String content = objectMapper.writeValueAsString(new ProblemSubmitRequest("python3", "code"));
         mvc.perform(post("/problems/{problemId}/submit", problem.getId())

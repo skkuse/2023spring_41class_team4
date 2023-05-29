@@ -1,8 +1,9 @@
 package com.example.server.teacher.feedback;
 
 import com.example.server.student.submission.Submission;
+import java.util.concurrent.CompletableFuture;
 
 public interface FeedbackService {
 
-    Feedback requestFeedback(Submission submission);
+    CompletableFuture<Feedback> requestFeedback(Submission submission);
 }
