@@ -39,7 +39,7 @@ export default function Register() {
     } else {
       console.log("done")
       //redirect('/login');
-      
+    
     try {
       const response = await axios.post('/api/users', {
         "email": email,
@@ -52,6 +52,7 @@ export default function Register() {
     } catch (error) {
       console.error(error);
     }
+    //window.location.href = '/login';
   }
   };
   return (
