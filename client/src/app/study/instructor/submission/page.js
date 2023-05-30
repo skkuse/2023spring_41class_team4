@@ -8,7 +8,7 @@ import "./page.css";
 export default function Submission() {
   useEffect(() => {
     async function getInfo() {
-      const res = await axios.get("/api/teacher/me", {
+      const res = await axios.get("/api/teacher/submissions", {
         headers: {
           "X-Auth-Token": "TEACHER1",
         },
@@ -20,9 +20,14 @@ export default function Submission() {
   const data = [];
   for (let i = 1; i < 30; i++) {
     data.push({
-      id: i,
-      title: "submission" + i,
-      date: "2023-05-22",
+      id: 1,
+      problemId: 1,
+      student: {
+        id: 1,
+        name: "Student1",
+      },
+      createdAt: "2023-05-24 1:20:00",
+      status: "SOLVED",
     });
   }
   return (

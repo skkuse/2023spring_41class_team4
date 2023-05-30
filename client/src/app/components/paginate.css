@@ -1,4 +1,4 @@
-li {
+.paginate li {
   list-style: none;
   float: left;
   cursor: pointer;
@@ -19,8 +19,7 @@ li {
 }
 
 .item {
-  display: flex;
-  padding: 20px 40px;
+  padding: 20px 0;
   margin: 10px 0;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
@@ -31,4 +30,24 @@ li {
   flex-direction: column;
   align-items: center;
   gap: 40px;
+}
+
+.submission-header {
+  height: 2rem;
+  background: lightgray;
+}
+
+.submission-container ul {
+  display: grid;
+  grid-template-columns: 10% 20% 20% 20% 20%;
+  padding: 0 5%;
+}
+
+.submission-container li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  height: 2rem;
+  vertical-align: middle;
 }
