@@ -15,3 +15,6 @@ paginate 이 install 되어있지 않아서 compile error가 뜨는 경우
 ```
 npm install react-paginate
 ```
+
+## 003 : CORS
+fetch로 백엔드 서버에서 값을 받아올 때 cors 정책으로 인한 에러가 떴습니다. 참고한 포스팅은 [여기](https://happyguy81.tistory.com/188)

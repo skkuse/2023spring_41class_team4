@@ -16,6 +16,9 @@ export default function Problems() {
       ratio: 0.3333
     })
   }
+  // const base_url = "https://port-0-codemy-7e6o2clhzvliku.sel4.cloudtype.app/"
+  // const url = base_url + "/problems"
+  // fetch()
   return (
     <main>
       <h1>xxx 학생</h1>

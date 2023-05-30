@@ -3,6 +3,7 @@ import Link from "next/link";
 import "./page.css";
 import Pagination from "../../components/paginate_prob"
 
+
 export default function Problems() {
   const data = [];
   for (let i=1;i<30;i++){
@@ -15,23 +16,40 @@ export default function Problems() {
       submit: 39.534,
       ratio: 0.3333
     })
-  }
+  };
+  const base_url = "https://port-0-codemy-7e6o2clhzvliku.sel4.cloudtype.app";
+  const url = base_url+'/me';
+  
+  fetch(url,{mode:'no-cors',headers:{Authentication:'Bearer {token}'}})
+    .then(response => {
+      if(response.ok) {
+        console.log(JSON.stringify(resonse));
+      }
+      else{
+        console.log("response not ok...")
+      }
+    })
+    // fetch(url,{mode:'no-cors'})
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     console.log(data);
+  //   });
   return (
     <main>
       <h1>xxx 학생</h1>
       <div className="line"></div>
       <nav className="nav">
-        <Link href="/study/student/me">me</Link>
+        <Link href="/study/student">me</Link>
         <Link href="/study/student/problem">Problem</Link>
         <Link href="/study/student/comment">Comment</Link>
       </nav>
       <div className="line"></div>
       <div className="gap"></div>
       <div>
-        <p>id: 1</p>
-        <p>name: Student1</p>
-        <p>email Student@gmail.com</p>
-        <p>teacher: Teacher1</p>
+        <p id="id">id: 1</p>
+        <p id="name">name: Student1</p>
+        <p id="email">email Student@gmail.com</p>
+        <p id="">teacher: Teacher1</p>
       </div>
     </main>
   );
