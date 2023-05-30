@@ -1,39 +1,43 @@
 "use client";
 import Link from "next/link";
+import axios from "axios";
+import { useEffect } from "react";
 import "./page.css";
 import Pagination from "../../components/paginate_prob"
 
 
 export default function Problems() {
-  const data = [];
-  for (let i=1;i<30;i++){
-    data.push({
-      id: i,
-      probNo: 2557,
-      title: "Hello World",
-      info: 383051,
-      ans: 948598,
-      submit: 39.534,
-      ratio: 0.3333
-    })
-  };
-  const base_url = "https://port-0-codemy-7e6o2clhzvliku.sel4.cloudtype.app";
-  const url = base_url+'/me';
+  let id;
+  let name;
+  let email;
+  let teacher_id;
+  let teacher_name;
+
+  useEffect(() => {
+    async function getInfo() {
+      const res = await axios.get("/api/me", {
+        headers: {
+          "X-Auth-Token": "STUDENT1",
+        },
+      });
+      id = res.data.id
+      name = res.data.name
+      email = res.data.email
+      teacher_id = res.data.teacher.id
+      teacher_name = res.data.teacher.name
+      
+      document.getElementById("id").innerText = "id: " + id
+      document.getElementById("name").innerText = "name: " + name
+      document.getElementById("email").innerText = "email: " + email
+      document.getElementById("teacher-id").innerText = "teacher-id: " + teacher_id
+      document.getElementById("teacher-name").innerText = "teacher-name: " + teacher_name
+      
+      // console.log(res.data);
+      // console.log(email)
+    }
+    getInfo();
+  }, []);
   
-  fetch(url,{mode:'no-cors',headers:{Authentication:'Bearer {token}'}})
-    .then(response => {
-      if(response.ok) {
-        console.log(JSON.stringify(resonse));
-      }
-      else{
-        console.log("response not ok...")
-      }
-    })
-    // fetch(url,{mode:'no-cors'})
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     console.log(data);
-  //   });
   return (
     <main>
       <h1>xxx 학생</h1>
@@ -46,10 +50,11 @@ export default function Problems() {
       <div className="line"></div>
       <div className="gap"></div>
       <div>
-        <p id="id">id: 1</p>
-        <p id="name">name: Student1</p>
-        <p id="email">email Student@gmail.com</p>
-        <p id="">teacher: Teacher1</p>
+        <p id="id">id:</p>
+        <p id="name">name:</p>
+        <p id="email">email:</p>
+        <p id="teacher-id">teacher-id:</p>
+        <p id="teacher-name">teacher-name:</p>
       </div>
     </main>
   );
