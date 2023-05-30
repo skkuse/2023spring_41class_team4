@@ -2,9 +2,12 @@
 import Link from "next/link";
 import "./page.css";
 import axios from 'axios';
+import { useEffect } from "react";
 
 
 import { useState } from 'react';
+
+import { useRouter } from 'next/router';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -38,7 +41,6 @@ export default function Login() {
       }
       console.log(url)
       //redirect('/login');
-        
       try {
         const response = await axios.post(url, {
           "email": email,
@@ -48,6 +50,7 @@ export default function Login() {
       } catch (error) {
         console.error(error);
       }
+      //window.location.href = '/';
   }
   };
 
@@ -55,15 +58,17 @@ export default function Login() {
     <main>
       <div class="containerLog">
         <div class="loginBox">
-          <h3 id="pageTitle">Login</h3>
+          <h3 id="pageTitle">로그인</h3>
           <form class="loginForm">
             <input onChange={handleEmail} className="input" value={email} type="text" placeholder="Email" />
             <input onChange={handlePassword} className="input" value={password} type="password" placeholder="Password" />
             <div class="radioForm">
+            <label for="Student">
               <input onChange={handleStatus} type="radio" name="radioType" id="Student" value="Student"></input>
-              <label for="Student">Student</label>
+              <span>Student</span></label>
+            <label for="Teacher">
               <input onChange={handleStatus} type="radio" name="radioType" id="Teacher" value="Teacher"></input>
-              <label for="Teacher">Teacher</label>
+              <span>Teacher</span></label>
           </div>
             <button onClick={handleSubmit} id="btnLogin" type="submit">로그인</button>
           </form>
