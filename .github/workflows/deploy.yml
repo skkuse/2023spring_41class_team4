@@ -1,35 +1,35 @@
-name: Deploy to cloudtype
-on:
-  push:
-    branches:
-      - main
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Connect deploy key
-        uses: cloudtype-github-actions/connect@v1
-        with:
-          token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          ghtoken: ${{ secrets.GHP_TOKEN }}
-      - name: Deploy
-        uses: cloudtype-github-actions/deploy@v1
-        with:
-          token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          project: junhyeong_space/codemy
-          stage: main
-          yaml: |
-            name: codemy
-            app: java@17
-            options:
-              ports: 8080
-              env:
-                - name: OPENAI_API_KEY
-                  value: ${{ secrets.OPENAI_API_KEY }}
-            context:
-              git:
-                url: git@github.com:${{ github.repository }}.git
-                ref: ${{ github.ref }}
-                path: server
+# name: Deploy to cloudtype
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: Connect deploy key
+#         uses: cloudtype-github-actions/connect@v1
+#         with:
+#           token: ${{ secrets.CLOUDTYPE_TOKEN }}
+#           ghtoken: ${{ secrets.GHP_TOKEN }}
+#       - name: Deploy
+#         uses: cloudtype-github-actions/deploy@v1
+#         with:
+#           token: ${{ secrets.CLOUDTYPE_TOKEN }}
+#           project: junhyeong_space/codemy
+#           stage: main
+#           yaml: |
+#             name: codemy
+#             app: java@17
+#             options:
+#               ports: 8080
+#               env:
+#                 - name: OPENAI_API_KEY
+#                   value: ${{ secrets.OPENAI_API_KEY }}
+#             context:
+#               git:
+#                 url: git@github.com:${{ github.repository }}.git
+#                 ref: ${{ github.ref }}
+#                 path: server
