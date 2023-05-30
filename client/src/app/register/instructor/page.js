@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { redirect } from 'next/navigation';
 
 
+
 export default function Register() {  
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -32,7 +33,7 @@ export default function Register() {
     } else {
       console.log("done")
       //redirect('/login');
-      
+    
     try {
       const response = await axios.post('/api/teacher/users', {
         "email": email,
@@ -43,6 +44,7 @@ export default function Register() {
     } catch (error) {
       console.error(error);
     }
+    //window.location.href = '/login';
   }
   };
 
