@@ -25,7 +25,8 @@ export default function Problems() {
       email = res.data.email
       teacher_id = res.data.teacher.id
       teacher_name = res.data.teacher.name
-      
+
+      document.getElementById("student-title").innerText = name +" 학생"
       document.getElementById("id").innerText = "id: " + id
       document.getElementById("name").innerText = "name: " + name
       document.getElementById("email").innerText = "email: " + email
@@ -40,7 +41,7 @@ export default function Problems() {
   
   return (
     <main>
-      <h1>xxx 학생</h1>
+      <h1 id="student-title">xxx 학생</h1>
       <div className="line"></div>
       <nav className="nav">
         <Link href="/study/student">me</Link>
