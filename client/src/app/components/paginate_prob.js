@@ -6,30 +6,26 @@ import "./paginate_prob.css";
 // Example items, to simulate fetching from another resources.
 
 function Items({ currentItems }) {
+  console.log("currentItems");
+  console.log(currentItems);
   return (
     <div className="items-container">
         <table className="items-table">
             <thead>
                 <tr>
-                    <th style={{width: "10%"}} data-sort="int">단계</th>
-                    <th style={{width: "10%"}} data-sort="int">문제 번호</th>
-                    <th style={{width: "30%"}} data-sort="string">제목</th>
-                    <th style={{width: "20%"}} data-sort="string">정보</th>
-                    <th style={{width: "10%"}} data-sort="int">정답</th>
-                    <th style={{width: "10%"}} data-sort="int">제출</th>
-                    <th style={{width: "10%"}} data-sort="float">정답 비율</th>
+                    <th style={{width: "10%"}} data-sort="int">id</th>
+                    <th style={{width: "10%"}} data-sort="int">pNumber</th>
+                    <th style={{width: "20%"}} data-sort="string">title</th>
+                    <th style={{width: "60%"}} data-sort="string">link</th>
                 </tr>
             </thead>
             <tbody>
                 {currentItems.map((item,idx) => (
                     <tr>
                         <td>{item.id}</td>
-                        <td><Link href={`study/student/problem/${item.id}`}>{item.probNo}</Link></td>
+                        <td><Link href={`study/student/problem/${item.id}`}>{item.pNumber}</Link></td>
                         <td><Link href={`study/student/problem/${item.id}`}>{item.title}</Link></td>
-                        <td><Link href={`study/student/problem/${item.id}`}>{item.info}</Link></td>
-                        <td><Link href={`study/student/problem/${item.id}`}>{item.ans}</Link></td>
-                        <td><Link href={`study/student/problem/${item.id}`}>{item.submit}</Link></td>
-                        <td><Link href={`study/student/problem/${item.id}`}>{item.ratio}</Link></td>
+                        <td><Link href={`study/student/problem/${item.id}`}>{item.link}</Link></td>
                     </tr>
                 ))}
             </tbody>

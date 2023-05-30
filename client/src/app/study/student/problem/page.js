@@ -1,24 +1,42 @@
 "use client";
 import Link from "next/link";
+import axios from "axios";
+import { useEffect } from "react";
 import "./page.css";
 import Pagination from "../../../components/paginate_prob"
 
+var data = [];
+var pageInfo;
+var itemsPerPage;
 export default function Problems() {
-  const data = [];
-  for (let i=1;i<30;i++){
-    data.push({
-      id: i,
-      probNo: 2557,
-      title: "Hello World",
-      info: 383051,
-      ans: 948598,
-      submit: 39.534,
-      ratio: 0.3333
-    })
-  }
-  // const base_url = "https://port-0-codemy-7e6o2clhzvliku.sel4.cloudtype.app/"
-  // const url = base_url + "/problems"
-  // fetch()
+  useEffect(() => {
+    async function getInfo() {
+      const res = await axios.get("/api/problems", {
+        headers: {
+          "X-Auth-Token": "STUDENT1",
+        },
+      });
+      console.log("debug");
+      console.log(res.data);
+      pageInfo = res.data.pageInfo;
+      itemsPerPage = pageInfo.pageSize;
+      // totalPage
+      // currentpage
+      // pageSize
+      // numberOfElements
+      for (let i = 0; i < pageInfo.numberOfElements; i++) {
+        let problem = res.data.problems[i];
+        console.log(problem);
+        data.push({
+          id: i+1,
+          pNumber: problem.id,
+          title: problem.title,
+          link: problem.link,
+        });
+      }
+    }
+    getInfo();
+  }, []);
   return (
     <main>
       <h1>xxx 학생</h1>
@@ -30,7 +48,7 @@ export default function Problems() {
       </nav>
       <div className="line"></div>
       <div className="gap"></div>
-      <Pagination itemsPerPage={10} data={data}></Pagination>
+      <Pagination itemsPerPage={itemsPerPage} data={data}></Pagination>
     </main>
   );
 }
