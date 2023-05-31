@@ -14,3 +14,32 @@
 .margin-top {
   margin-top: 40px;
 }
+
+.feedback-container {
+  height: 260px;
+  flex-grow: 1;
+  margin: 20px;
+  padding: 40px;
+  background: #e7ecff;
+  border-radius: 20px;
+}
+
+.submit-button {
+  margin-top: 10px;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  border: 0;
+  background: #e7ecff;
+  cursor: pointer;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.submit-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
