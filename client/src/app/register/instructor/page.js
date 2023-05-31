@@ -5,7 +5,6 @@ import axios from 'axios';
 
 
 import { useState } from 'react';
-import { redirect } from 'next/navigation';
 
 
 
@@ -32,7 +31,6 @@ export default function Register() {
       console.log("empty form")
     } else {
       console.log("done")
-      //redirect('/login');
     
     try {
       const response = await axios.post('/api/teacher/users', {
@@ -41,10 +39,10 @@ export default function Register() {
 	      "name": name
       });
       console.log(response);
+      window.location.href = '/login';
     } catch (error) {
       console.error(error);
     }
-    //window.location.href = '/login';
   }
   };
 
