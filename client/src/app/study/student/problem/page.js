@@ -16,7 +16,7 @@ export default function Problems() {
     async function getInfo() {
       const res = await axios.get("/api/problems", {
         headers: {
-          "X-Auth-Token": "STUDENT1",
+          "X-Auth-Token": localStorage.Codemy,
         },
       });
       console.log("debug");
@@ -38,7 +38,6 @@ export default function Problems() {
           link: problem.link,
         });
       }
-      console.log(data);
     }
     getInfo();
   }, []);

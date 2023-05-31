@@ -17,7 +17,7 @@ export default function Problems() {
     async function getInfo() {
       const res = await axios.get("/api/me", {
         headers: {
-          "X-Auth-Token": "STUDENT1",
+          "X-Auth-Token": localStorage.Codemy,
         },
       });
       id = res.data.id
