@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -20,14 +22,10 @@ public class TeacherSubmissionService {
 
     private final SubmissionRepository submissionRepository;
 
-    public SubmissionListResponse getSubmissionList(Long teacherId, Pageable pageable) {
-        Page<Submission> submissions = submissionRepository.findAllByTeacherId(teacherId, pageable);
-        return new SubmissionListResponse(submissions);
-    }
-
-    public SubmissionListResponse getSubmissionsByStudent(Long teacherId, Long studentId, Pageable pageable) {
-        Page<Submission> submissions = submissionRepository.findAllByTeacherIdAndStudentId(teacherId, studentId,
-                pageable);
+    public SubmissionListResponse getSubmissionList(Long teacherId, Optional<Long> studentId, Pageable pageable) {
+        Page<Submission> submissions = studentId.isPresent()
+                ? submissionRepository.findAllByTeacherIdAndStudentId(teacherId, studentId.get(), pageable)
+                : submissionRepository.findAllByTeacherId(teacherId, pageable);
         return new SubmissionListResponse(submissions);
     }
 
