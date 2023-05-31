@@ -1,14 +1,17 @@
 "use client";
 import Link from "next/link";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./page.css";
 import Pagination from "../../../components/paginate_prob"
+
 
 var data = [];
 var pageInfo;
 var itemsPerPage;
 export default function Problems() {
+  // const [email, setEmail] = useState("");
+
   useEffect(() => {
     async function getInfo() {
       const res = await axios.get("/api/problems", {
@@ -24,6 +27,7 @@ export default function Problems() {
       // currentpage
       // pageSize
       // numberOfElements
+      data = []
       for (let i = 0; i < pageInfo.numberOfElements; i++) {
         let problem = res.data.problems[i];
         console.log(problem);
@@ -34,6 +38,7 @@ export default function Problems() {
           link: problem.link,
         });
       }
+      console.log(data);
     }
     getInfo();
   }, []);

@@ -43,14 +43,14 @@ export default function ProblemItem({ params }) {
 
   const runCode = async () => {
 	// 제출버튼을 누르면 axios를 통해 서버로 코드데이터가 넘어간다.
-    await axios.post("/api/problems/"+{problemId}+"/submit", {
+    console.log(problemId);
+    await axios.post("/api/problems/"+problemId+"/submit", {
       headers: {
         "X-Auth-Token": "STUDENT1",
       },
-      body: {
+      "data": {
         "language": "python3",
         "content": code,
-        
       } })
       .then((result) => {
         console.log(result.data)
@@ -59,7 +59,7 @@ export default function ProblemItem({ params }) {
       .catch((err) => {
         console.log(err)
       })
-  }
+  };
 
 // CodeMirror에서 MarkDown도 지원해줘서 문제에 대한 설명을 MarkDown으로 표시할 수 있었다.
   const markdown = `
