@@ -6,6 +6,7 @@ import "./header.css";
 
 export default function Header() {
   const [userName, setUserName] = useState("");
+  const [studyURL, setStudyURL] = useState("/");
   useEffect(() => {
     async function getInfo(token) {
       let url = "";
@@ -26,10 +27,16 @@ export default function Header() {
     const token = localStorage.getItem("Codemy");
     if (name !== null) {
       setUserName(name);
+      if (token.substr(0, 7) === "TEACHER") {
+        setStudyURL("/study/instructor");
+      } else {
+        setStudyURL("/study/student");
+      }
     } else if (token !== null) {
       getInfo(token);
     } else {
       setUserName("Login");
+      setStudyURL("/login");
     }
   }, []);
 
@@ -45,7 +52,7 @@ export default function Header() {
         <Link href="/" className="text pointer">
           Home
         </Link>
-        <Link href="/study" className="text pointer">
+        <Link href={studyURL} className="text pointer">
           Study
         </Link>
       </div>
