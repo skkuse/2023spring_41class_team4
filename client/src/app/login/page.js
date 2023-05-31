@@ -40,17 +40,16 @@ export default function Login() {
         url = '/api/users/login'
       }
       console.log(url)
-      //redirect('/login');
       try {
         const response = await axios.post(url, {
           "email": email,
           "password": password
         });
         console.log(response);
+        window.location.href = '/';
       } catch (error) {
         console.error(error);
       }
-      //window.location.href = '/';
   }
   };
 
