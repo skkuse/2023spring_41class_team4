@@ -27,7 +27,7 @@ export default function Submission() {
         name: "Student" + i,
       },
       createdAt: "2023-05-24 1:20:00",
-      status: Math.random() < 0.5 ? "SOLVED" : "COMMENTED",
+      status: i % 3 == 0 ? "SOLVED" : "COMMENTED",
     });
   }
   return (
