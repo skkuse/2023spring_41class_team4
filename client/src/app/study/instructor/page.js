@@ -3,6 +3,7 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import axios from "axios";
 import Line from "@/app/components/line";
+import Bar from "@/app/components/bar";
 import "./page.css";
 import { useState, useEffect } from "react";
 
@@ -38,7 +39,7 @@ export default function Instructor() {
       */
     },
   };
-  const data = {
+  const lineData = {
     labels: labels,
     datasets: [
       {
@@ -64,6 +65,71 @@ export default function Instructor() {
       },
     ],
   };
+
+  const barOptions = {
+    responsive: true,
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true,
+      },
+    },
+  };
+
+  const barData = {
+    labels: ["1004", "2104", "1024", "21096", "7517", "3198", "22756"],
+    datasets: [
+      {
+        label: "Commented",
+        data: [4, 3, 2, 2, 1, 0, 1],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.6)",
+          "rgba(255, 159, 64, 0.6)",
+          "rgba(255, 205, 86, 0.6)",
+          "rgba(75, 192, 192, 0.6)",
+          "rgba(54, 162, 235, 0.6)",
+          "rgba(153, 102, 255, 0.6)",
+          "rgba(201, 203, 207, 0.6)",
+        ],
+        borderColor: [
+          "rgb(255, 99, 132)",
+          "rgb(255, 159, 64)",
+          "rgb(255, 205, 86)",
+          "rgb(75, 192, 192)",
+          "rgb(54, 162, 235)",
+          "rgb(153, 102, 255)",
+          "rgb(201, 203, 207)",
+        ],
+        borderWidth: 1,
+      },
+      {
+        label: "Solved",
+        data: [9, 6, 5, 3, 3, 2, 1],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+          "rgba(255, 205, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(201, 203, 207, 0.2)",
+        ],
+        borderColor: [
+          "rgb(255, 99, 132)",
+          "rgb(255, 159, 64)",
+          "rgb(255, 205, 86)",
+          "rgb(75, 192, 192)",
+          "rgb(54, 162, 235)",
+          "rgb(153, 102, 255)",
+          "rgb(201, 203, 207)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <main>
       <h1 className="mb20">xxx강사</h1>
@@ -77,7 +143,11 @@ export default function Instructor() {
       <div className="summary-container">
         <h2>최근 7일 제출 기록</h2>
         <div style={{ width: "500px", height: "300px" }}>
-          <Line options={options} data={data}></Line>
+          <Line data={lineData} options={options}></Line>
+        </div>
+        <h2>최근 7일 많이 제출된 문제</h2>
+        <div style={{ width: "500px", height: "300px" }}>
+          <Bar data={barData} options={barOptions}></Bar>
         </div>
       </div>
     </main>
