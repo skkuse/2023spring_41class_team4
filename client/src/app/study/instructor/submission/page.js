@@ -20,14 +20,14 @@ export default function Submission() {
   const data = [];
   for (let i = 1; i < 30; i++) {
     data.push({
-      id: 1,
-      problemId: 1,
+      id: i,
+      problemId: i + 1000,
       student: {
-        id: 1,
-        name: "Student1",
+        id: i,
+        name: "Student" + i,
       },
       createdAt: "2023-05-24 1:20:00",
-      status: "SOLVED",
+      status: Math.random() < 0.5 ? "SOLVED" : "COMMENTED",
     });
   }
   return (

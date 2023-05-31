@@ -8,7 +8,7 @@ import "./paginate.css";
 
 function SubmissionItems({ currentItems }) {
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%", marginTop: "2rem" }}>
       <header className="submission-header submission-container">
         <ul>
           <li>#</li>
@@ -30,7 +30,15 @@ function SubmissionItems({ currentItems }) {
                 <li>{item.student.name}</li>
                 <li>{item.problemId}</li>
                 <li>{item.createdAt}</li>
-                <li>{item.status}</li>
+                <li
+                  style={
+                    item.status == "SOLVED"
+                      ? { color: "#e74c3c" }
+                      : { color: "#009874" }
+                  }
+                >
+                  {item.status}
+                </li>
               </ul>
             </Link>
           ))}
@@ -41,14 +49,27 @@ function SubmissionItems({ currentItems }) {
 
 function StudentItems({ currentItems }) {
   return (
-    <div className="items-container">
-      {currentItems &&
-        currentItems.map((item) => (
-          <Link href={`/study/instructor/student/${item.id}`} className="item">
-            {item.title}
-            {item.date}
-          </Link>
-        ))}
+    <div style={{ width: "100%", marginTop: "2rem" }}>
+      <header className="student-header student-container">
+        <ul>
+          <li>#</li>
+          <li>학생</li>
+        </ul>
+      </header>
+      <div className="items-container">
+        {currentItems &&
+          currentItems.map((item) => (
+            <Link
+              href={`/study/instructor/student/${item.id}`}
+              className="item student-container"
+            >
+              <ul>
+                <li>{item.id}</li>
+                <li>{item.name}</li>
+              </ul>
+            </Link>
+          ))}
+      </div>
     </div>
   );
 }

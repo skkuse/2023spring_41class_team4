@@ -1,5 +1,8 @@
+"use client";
 import Link from "next/link";
+import axios from "axios";
 import "./page.css";
+import { useEffect } from "react";
 
 export default function Instructor() {
   return (

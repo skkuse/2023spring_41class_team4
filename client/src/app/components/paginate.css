@@ -4,7 +4,7 @@
   cursor: pointer;
   padding: 6px 8px;
   margin: 0 4px;
-  border: 1px solid black;
+  border: 1px solid #505f98;
   border-radius: 4px;
 }
 
@@ -20,9 +20,7 @@
 
 .item {
   padding: 20px 0;
-  margin: 10px 0;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #505f98;
 }
 
 #container {
@@ -34,16 +32,42 @@
 
 .submission-header {
   height: 2rem;
-  background: lightgray;
+  background: #e7ecff;
+  border-top: 1px solid #505f98;
+  border-bottom: 1px solid #505f98;
+  font-weight: 600;
 }
 
 .submission-container ul {
   display: grid;
-  grid-template-columns: 10% 20% 20% 20% 20%;
+  grid-template-columns: 10% 20% 20% 30% 20%;
   padding: 0 5%;
 }
 
 .submission-container li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  height: 2rem;
+  vertical-align: middle;
+}
+
+.student-header {
+  height: 2rem;
+  background: #e7ecff;
+  border-top: 1px solid #505f98;
+  border-bottom: 1px solid #505f98;
+  font-weight: 600;
+}
+
+.student-container ul {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 0 5%;
+}
+
+.student-container li {
   display: flex;
   justify-content: center;
   align-items: center;

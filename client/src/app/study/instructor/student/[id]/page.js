@@ -7,8 +7,13 @@ export default function StudentItem({ params }) {
   for (let i = 1; i < 30; i++) {
     data.push({
       id: i,
-      title: "submission" + i,
-      date: "2023-05-22",
+      problemId: i + 1000,
+      student: {
+        id: i,
+        name: `Student${i}`,
+      },
+      createdAt: "2023-05-24 1:20:00",
+      status: "SOLVED",
     });
   }
   return (
