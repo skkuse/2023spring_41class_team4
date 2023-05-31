@@ -7,6 +7,7 @@ import {
   CategoryScale,
   Legend,
   Title,
+  Tooltip,
 } from "chart.js";
 
 export default function Line({ data, options }) {
@@ -16,7 +17,8 @@ export default function Line({ data, options }) {
     LinearScale,
     CategoryScale,
     Legend,
-    Title
+    Title,
+    Tooltip
   );
 
   return <Chart type="line" data={data} options={options}></Chart>;
