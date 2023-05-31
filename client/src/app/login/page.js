@@ -46,7 +46,7 @@ export default function Login() {
           "password": password
         });
         console.log(response);
-        window.location.href = '/';
+        window.location.href = '/study';
       } catch (error) {
         console.error(error);
       }
