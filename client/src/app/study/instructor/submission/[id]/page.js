@@ -72,7 +72,7 @@ int main(){
     <main>
       <div className="student-status">
         <h1>xxx 학생</h1>
-        <div className="flex-col margin-top">
+        <div className="flex-col">
           <div className="flex-col margin-top">
             <h1>Code</h1>
             <div>

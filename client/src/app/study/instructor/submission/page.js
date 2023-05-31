@@ -32,7 +32,7 @@ export default function Submission() {
   }
   return (
     <main>
-      <h1>xxx강사</h1>
+      <h1 className="mb20">xxx강사</h1>
       <div className="line"></div>
       <nav className="nav">
         <Link href="/study/instructor">Summary</Link>

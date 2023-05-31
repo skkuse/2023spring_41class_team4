@@ -99,6 +99,10 @@ main {
   padding: 100px 400px;
 }
 
+.mb20 {
+  margin-bottom: 20px;
+}
+
 /*
 body {
   color: rgb(var(--foreground-rgb));
