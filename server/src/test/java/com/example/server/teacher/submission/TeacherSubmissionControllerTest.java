@@ -91,7 +91,7 @@ class TeacherSubmissionControllerTest {
         Submission submission1 = submissionRepository.save(new Submission(student, problem1, "python3", "a+b"));
         Submission submission2 = submissionRepository.save(new Submission(student, problem2, "python3", "a-b"));
 
-        mvc.perform(get("/teacher/submissions/students/{studentId}", student.getId())
+        mvc.perform(get("/teacher/submissions?studentId={studentId}", student.getId())
                         .header("X-Auth-Token", token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.submissions[0].id").value(submission1.getId()))

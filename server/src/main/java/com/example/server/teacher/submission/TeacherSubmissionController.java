@@ -7,12 +7,9 @@ import com.example.server.teacher.submission.dto.TeacherSubmissionResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,14 +19,9 @@ public class TeacherSubmissionController {
     private final TeacherSubmissionService submissionService;
 
     @GetMapping
-    public ResponseEntity<SubmissionListResponse> getSubmissionList(Pageable pageable) {
-        return ResponseEntity.ok(submissionService.getSubmissionList(CurrentUserHolder.getUserId(), pageable));
-    }
-
-    @GetMapping("/students/{studentId}")
-    public ResponseEntity<SubmissionListResponse> getSubmissionsByStudent(@PathVariable Long studentId,
-                                                                          Pageable pageable) {
-        return ResponseEntity.ok(submissionService.getSubmissionsByStudent(CurrentUserHolder.getUserId(), studentId, pageable));
+    public ResponseEntity<SubmissionListResponse> getSubmissionList(@RequestParam(required = false) Optional<Long> studentId,
+                                                                    Pageable pageable) {
+        return ResponseEntity.ok(submissionService.getSubmissionList(CurrentUserHolder.getUserId(), studentId, pageable));
     }
 
     @GetMapping("/{submissionId}")
