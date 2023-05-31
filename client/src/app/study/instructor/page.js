@@ -8,16 +8,23 @@ import "./page.css";
 import { useState, useEffect } from "react";
 
 export default function Instructor() {
+  const [userName, setUserName] = useState("");
   const now = dayjs();
   const labels = [];
   for (let i = 6; i >= 0; i--)
     labels.push(now.subtract(i, "d").format("YYYY-MM-DD"));
 
   useEffect(() => {
+    const name = localStorage.getItem("CodemyName");
+    setUserName(name);
+  }, []);
+
+  useEffect(() => {
     async function getInfo() {
+      const token = localStorage.getItem("Codemy");
       const res = await axios.get("/api/teacher/submissions", {
         headers: {
-          "X-Auth-Token": "TEACHER1",
+          "X-Auth-Token": token,
         },
       });
       console.log(res.data);
@@ -132,7 +139,7 @@ export default function Instructor() {
 
   return (
     <main>
-      <h1 className="mb20">xxx강사</h1>
+      <h1 className="mb20">{userName} 강사</h1>
       <div className="line"></div>
       <nav className="nav">
         <Link href="/study/instructor">Summary</Link>

@@ -6,7 +6,14 @@ import Pagination from "@/app/components/paginate";
 import "./page.css";
 
 export default function Submission() {
+  const [userName, setUserName] = useState("");
   const [submissionList, setSubmissionList] = useState([]);
+
+  useEffect(() => {
+    const name = localStorage.getItem("CodemyName");
+    setUserName(name);
+  }, []);
+
   useEffect(() => {
     async function getInfo() {
       const res = await axios.get("/api/teacher/submissions", {
@@ -39,7 +46,7 @@ export default function Submission() {
 
   return (
     <main>
-      <h1 className="mb20">xxx강사</h1>
+      <h1 className="mb20">{userName} 강사</h1>
       <div className="line"></div>
       <nav className="nav">
         <Link href="/study/instructor">Summary</Link>

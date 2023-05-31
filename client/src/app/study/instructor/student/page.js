@@ -6,7 +6,14 @@ import Pagination from "@/app/components/paginate";
 import "./page.css";
 
 export default function Student() {
+  const [userName, setUserName] = useState("");
   const [studentList, setStudentList] = useState([]);
+
+  useEffect(() => {
+    const name = localStorage.getItem("CodemyName");
+    setUserName(name);
+  }, []);
+
   useEffect(() => {
     async function getInfo() {
       const res = await axios.get("/api/teacher/students", {
@@ -33,7 +40,7 @@ export default function Student() {
 
   return (
     <main>
-      <h1 className="mb20">xxx강사</h1>
+      <h1 className="mb20">{userName} 강사</h1>
       <div className="line"></div>
       <nav className="nav">
         <Link href="/study/instructor">Summary</Link>
