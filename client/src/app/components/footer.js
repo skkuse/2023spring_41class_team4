@@ -5,13 +5,13 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <div className="flex-row">
+        <div className="footer-flex-row">
           <span className="opacity4">2023 Software Engineering Team4</span>
           <h2 className="title">Codemy</h2>
         </div>
         <div className="line"></div>
-        <div className="flex-row">
-          <div className="flex-row gap">
+        <div className="footer-flex-row">
+          <div className="footer-flex-row gap">
             <Link href="/" className="opacity8 text">
               Home
             </Link>
