@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "@/app/components/paginate";
 import "./page.css";
 
 export default function Student() {
+  const [studentList, setStudentList] = useState([]);
   useEffect(() => {
     async function getInfo() {
       const res = await axios.get("/api/teacher/students", {
@@ -14,16 +15,22 @@ export default function Student() {
         },
       });
       console.log(res.data);
+      setStudentList(res.data.students);
     }
-    getInfo();
+    function makeDummyData() {
+      const data = [];
+      for (let i = 1; i < 30; i++) {
+        data.push({
+          id: i,
+          name: `Student${i}`,
+        });
+      }
+      setStudentList(data);
+    }
+    // getInfo();
+    makeDummyData();
   }, []);
-  const data = [];
-  for (let i = 1; i < 30; i++) {
-    data.push({
-      id: i,
-      name: `Student${i}`,
-    });
-  }
+
   return (
     <main>
       <h1 className="mb20">xxx강사</h1>
@@ -36,7 +43,7 @@ export default function Student() {
       <div className="line"></div>
       <Pagination
         itemsPerPage={10}
-        data={data}
+        data={studentList}
         listItemOption={"student"}
       ></Pagination>
     </main>

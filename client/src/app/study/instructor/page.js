@@ -4,13 +4,25 @@ import dayjs from "dayjs";
 import axios from "axios";
 import Line from "@/app/components/line";
 import "./page.css";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function Instructor() {
   const now = dayjs();
   const labels = [];
   for (let i = 6; i >= 0; i--)
     labels.push(now.subtract(i, "d").format("YYYY-MM-DD"));
+
+  useEffect(() => {
+    async function getInfo() {
+      const res = await axios.get("/api/teacher/submissions", {
+        headers: {
+          "X-Auth-Token": "TEACHER1",
+        },
+      });
+      console.log(res.data);
+    }
+    // getInfo();
+  }, []);
 
   const options = {
     responsive: true,
