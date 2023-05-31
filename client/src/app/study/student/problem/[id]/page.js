@@ -2,14 +2,14 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import CodeMirror from '@uiw/react-codemirror';
-// import { javascript } from '@codemirror/lang-javascript';
 import { python } from '@codemirror/lang-python';
 import axios from "axios";
 import "./page.css";
-
-var problemId;
+import Link from "next/link";
 
 export default function ProblemItem({ params }) {
+  const [problemId, setProblemId] = useState(0);
+
   // 문제 정보 가져오기
   useEffect(() => {
     async function getInfo() {
@@ -18,35 +18,13 @@ export default function ProblemItem({ params }) {
           "X-Auth-Token": localStorage.Codemy,
         },
       });
-      
       let problem = res.data.problems[params.id-1];
-      window.problemId = problem.id;
-      // document.getElementById("title").innerText = problem.id;
+      localStorage.setItem("problemId",problem.id)
       document.getElementById("title").innerText = problem.id +": "+ problem.title;
-      document.getElementById("link").innerText = "링크: "+problem.link;
+      document.getElementById("link").innerHTML = "링크: <a href='"+problem.link+"'><b>"+problem.link+"</b></a>";
     }
     getInfo();
   }, []);
-  
-  // 문제 내용 가져오기
-  useEffect(() => {
-    async function getInfo() {
-      const res = await axios.get("/api/problems/"+window.problemId, {
-        headers: {
-          "X-Auth-Token": localStorage.Codemy,
-        },
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-      let content = res.data.content;
-      
-      // document.getElementById("title").innerText = problem.id;
-      document.getElementById("content").innerText = "문제: " + content;
-    }
-    getInfo();
-  }, []);
-
 
   // codeMirror 기본 코드
   const pyFuction = `print(A+B)
@@ -65,26 +43,22 @@ export default function ProblemItem({ params }) {
 
   const runCode = async () => {
 	  // 제출버튼을 누르면 axios를 통해 서버로 코드데이터가 넘어간다.
-    useEffect(() => {
-      async function submit() {
-        const res = await axios.post("/api/problems/"+problemId+"/submit", {
-          headers: {
-            "X-Auth-Token": localStorage.Codemy,
-            "Content-Type":"application/json",
-          },
-          data: {
-            "language": "python3",
-            "content": code,
-          },
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-        console.log("result")
-        console.log(res.data)
-      }
-      submit();
-    }, []);
+    const res = await axios.post("/api/problems/"+localStorage.problemId+"/submit", {
+      headers: {
+        "X-Auth-Token": localStorage.Codemy,
+        "Content-Type":"application/json",
+      },
+      data: {
+        "language": "python3",
+        "content": code,
+      },
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
   };
 
 // CodeMirror에서 MarkDown도 지원해줘서 문제에 대한 설명을 MarkDown으로 표시할 수 있었다.
@@ -103,7 +77,6 @@ export default function ProblemItem({ params }) {
       <div>
         <h3 id="title"></h3>
         <p id="link">링크: </p>
-        <p id="content">문제: </p>
         <p></p>
       </div>
       <div><h3>Answer Code</h3></div>
