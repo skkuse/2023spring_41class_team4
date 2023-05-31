@@ -38,7 +38,6 @@ export default function Register() {
       console.log("Lacking data")
     } else {
       console.log("done")
-      //redirect('/login');
     
     try {
       const response = await axios.post('/api/users', {
@@ -49,10 +48,11 @@ export default function Register() {
 	      "teacherCode": teacherCode
       });
       console.log(response);
+      window.location.href = '/login';
     } catch (error) {
       console.error(error);
     }
-    //window.location.href = '/login';
+    
   }
   };
   return (
