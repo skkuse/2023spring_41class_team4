@@ -1,0 +1,54 @@
+.paginate li {
+  list-style: none;
+  float: left;
+  cursor: pointer;
+  padding: 6px 8px;
+  margin: 0 4px;
+  border: 1px solid #505f98;
+  border-radius: 4px;
+}
+
+.selected {
+  color: red;
+}
+
+.items-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.item {
+  padding: 20px 0;
+  border-bottom: 1px solid #505f98;
+  /* border-color: #e7ecff; */
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.submission-header {
+  height: 2rem;
+  background: #e7ecff;
+  border-top: 1px solid #505f98;
+  border-bottom: 1px solid #505f98;
+  font-weight: 600;
+}
+
+.submission-container ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.submission-container li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  vertical-align: middle;
+  width: 20%;
+}
