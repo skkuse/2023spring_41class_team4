@@ -68,10 +68,10 @@ return 0;
   return (
     <main>
       <div className="student-status">
-        <h1>{localStorage.CodemyName} 학생</h1>
+        {/* <h1>{localStorage.CodemyName} 학생</h1> */}
         <div className="flex-col">
           <div className="flex-col margin-top">
-            <h1>Code</h1>
+            <h1>Submitted Code</h1>
             <div>
               <CodeViwer
                 code={feedback && feedback.content}
