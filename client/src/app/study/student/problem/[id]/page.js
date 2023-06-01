@@ -20,8 +20,9 @@ export default function ProblemItem({ params }) {
       });
       let problem = res.data.problems[params.id-1];
       localStorage.setItem("problemId",problem.id)
-      document.getElementById("title").innerText = problem.id +": "+ problem.title;
-      document.getElementById("link").innerHTML = "링크: <a href='"+problem.link+"'><b>"+problem.link+"</b></a>";
+      document.getElementById("title").innerText = problem.title ;
+      document.getElementById("problemNo").innerText = problem.id + "번";
+      document.getElementById("link").innerHTML = "링크: <a href='"+problem.link+"'>"+problem.link+"</a>";
     }
     getInfo();
   }, []);
@@ -29,6 +30,10 @@ export default function ProblemItem({ params }) {
   // codeMirror 기본 코드
   const pyFuction = `print(A+B)
   
+  
+
+
+
   
   
   
@@ -73,13 +78,20 @@ export default function ProblemItem({ params }) {
 
   return (
     <main>
-      <div>id : {params.id}</div>
-      <div>
+      {/* <div>id : {params.id}</div> */}
+      <div className='sub-title'>
         <h3 id="title"></h3>
-        <p id="link">링크: </p>
-        <p></p>
       </div>
-      <div><h3>Answer Code</h3></div>
+      <div className="line"></div>
+      <div className='description'>
+        <p id="problemNo"></p>
+        <p id="link"></p>
+      </div>
+      <div className='sub-title submit-container'>
+        <h3>제출</h3>
+      </div>
+      <div className="line"></div>
+
       <div className='codingIDE'>
         <CodeMirror
           className='CodeMirror'
@@ -92,8 +104,9 @@ export default function ProblemItem({ params }) {
           gutter={true} // 자동생성
         />
       </div>
-
-      <div className="BtnArea" onClick={runCode}>Submit</div>
+      <div className='submit-button-wrapper'>
+        <div className="submit-button" onClick={runCode}>Submit</div>
+      </div>
 
     </main>
 

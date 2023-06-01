@@ -21,7 +21,6 @@
 .item {
   padding: 20px 0;
   border-bottom: 1px solid #505f98;
-  /* border-color: #e7ecff; */
 }
 
 #container {
@@ -40,15 +39,39 @@
 }
 
 .submission-container ul {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 10% 20% 20% 30% 20%;
+  padding: 0 5%;
 }
 
 .submission-container li {
   display: flex;
   justify-content: center;
   align-items: center;
+  list-style: none;
   height: 2rem;
   vertical-align: middle;
-  width: 20%;
+}
+
+.student-header {
+  height: 2rem;
+  background: #e7ecff;
+  border-top: 1px solid #505f98;
+  border-bottom: 1px solid #505f98;
+  font-weight: 600;
+}
+
+.student-container ul {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 0 5%;
+}
+
+.student-container li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  height: 2rem;
+  vertical-align: middle;
 }

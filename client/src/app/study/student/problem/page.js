@@ -1,17 +1,15 @@
 "use client";
 import Link from "next/link";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./page.css";
-import Pagination from "../../../components/paginate_prob"
+import Pagination from "@/app/components/paginate_prob"
 
 
 var data = [];
 var pageInfo;
 var itemsPerPage;
 export default function Problems() {
-  // const [email, setEmail] = useState("");
-
   useEffect(() => {
     async function getInfo() {
       const res = await axios.get("/api/problems", {
