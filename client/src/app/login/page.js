@@ -62,7 +62,7 @@ export default function Login() {
   };
 
   return (
-    <main>
+    <main style={{ padding: "83px 0" }}>
       <div class="containerLog">
         <div class="loginBox">
           <h3 id="pageTitle">로그인</h3>
