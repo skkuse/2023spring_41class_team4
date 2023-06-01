@@ -4,6 +4,7 @@ import com.example.server.student.problem.Problem;
 import com.example.server.student.user.Student;
 import com.example.server.teacher.feedback.Feedback;
 import com.example.server.teacher.user.Teacher;
+import com.example.server.utils.TimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.Optional;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Submission {
+public class Submission extends TimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "submission_id")

@@ -1,6 +1,7 @@
 package com.example.server.student.problem;
 
 import com.example.server.student.user.Student;
+import com.example.server.utils.TimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SuggestedProblem {
+public class SuggestedProblem extends TimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "suggested_problem_id")
