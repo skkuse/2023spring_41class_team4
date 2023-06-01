@@ -7,6 +7,7 @@ import "./page.css";
 
 export default function SubmissionItem({ params }) {
   const [feedback, setFeedback] = useState(null);
+  const [comment, setComment] = useState("");
   useEffect(() => {
     Prism.highlightAll();
     async function getInfo() {
@@ -48,6 +49,11 @@ return 0;
             security: 89,
           },
         },
+        comment: {
+          id: 1,
+          content: "잘했어요",
+          createdAt: "2023-05-24 2:20:00",
+        },
       };
       setFeedback(_feedback);
       console.log(_feedback);
@@ -64,6 +70,22 @@ return 0;
     "modularity",
     "security",
   ];
+
+  const submitCommentHandler = async () => {
+    await axios.get(
+      `/api/teacher/submissions/${params.id}/comment`,
+      {
+        headers: {
+          "X-Auth-Token": "TEACHER1",
+        },
+      },
+      {
+        body: {
+          content: comment,
+        },
+      }
+    );
+  };
 
   return (
     <main>
@@ -132,9 +154,17 @@ return 0;
               rows="10"
               placeholder="comment"
               style={{ padding: "20px 40px" }}
+              value={comment}
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
             ></textarea>
             <div className="submit-button-container">
-              <button className="submit-button" type="button">
+              <button
+                className="submit-button"
+                type="button"
+                onClick={submitCommentHandler}
+              >
                 Submit
               </button>
             </div>

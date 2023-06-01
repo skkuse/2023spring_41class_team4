@@ -25,7 +25,7 @@ export default function StudentItem({ params }) {
           problemId: i + 1000,
           student: {
             id: i,
-            name: `Student${i}`,
+            name: "Student1",
           },
           createdAt: "2023-05-24 1:20:00",
           status: "SOLVED",
