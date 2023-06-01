@@ -5,15 +5,36 @@
 }
 
 .nav {
-display: flex;
-flex-direction: row;
-align-items: center;
-height: 3rem;
-gap: 40px;
-padding: 0 40px;
-font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 3rem;
+    gap: 40px;
+    padding: 0 40px;
+    font-size: 18px;
 }
 
 .gap{
     margin-bottom:10px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    font-size: 1em;
+    margin-bottom: 0.3em;
+}
+
+.me-content{
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.me-title{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
 }

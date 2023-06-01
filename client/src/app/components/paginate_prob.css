@@ -41,8 +41,12 @@ gap: 40px;
 }
 
 th,td {
-    padding: 3px;
+    padding: 12px 6px;
     /* border: 1px solid #f9f9f9; */
     border: 1px solid #ddd;
     /* background-color: #f9f9f9 */
+}
+
+.item-header{
+  background-color: #E7ECFF;
 }

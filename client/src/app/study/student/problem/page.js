@@ -43,7 +43,7 @@ export default function Problems() {
   }, []);
   return (
     <main>
-      <h1>xxx 학생</h1>
+      <h1>{localStorage.CodemyName} 학생</h1>
       <div className="line"></div>
       <nav className="nav">
         <Link href="/study/student">me</Link>

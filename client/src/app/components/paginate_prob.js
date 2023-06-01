@@ -11,12 +11,12 @@ function Items({ currentItems }) {
   return (
     <div className="items-container">
         <table className="items-table">
-            <thead>
+            <thead className="item-header">
                 <tr>
-                    <th style={{width: "10%"}} data-sort="int">id</th>
-                    <th style={{width: "10%"}} data-sort="int">pNumber</th>
-                    <th style={{width: "20%"}} data-sort="string">title</th>
-                    <th style={{width: "60%"}} data-sort="string">link</th>
+                    <th style={{width: "8%"}} data-sort="int">#</th>
+                    <th style={{width: "12%"}} data-sort="int">문제 번호</th>
+                    <th style={{width: "20%"}} data-sort="string">제목</th>
+                    <th style={{width: "60%"}} data-sort="string">링크</th>
                 </tr>
             </thead>
             <tbody>
