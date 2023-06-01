@@ -29,6 +29,7 @@ export default function Comments() {
       data = [];
       for (let i = 0; i < pageInfo.numberOfElements; i++) {
         let submission = res.data.submissions[i];
+        console.log("submission");
         console.log(submission);
         data.push({
           id: i+1,

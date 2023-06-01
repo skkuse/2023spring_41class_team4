@@ -22,14 +22,14 @@ function Items({ currentItems }) {
         {currentItems &&
           currentItems.map((item) => (
             <Link
-              href={`/study/instructor/submission/${item.id}`}
+              href={`/study/student/comment/${item.id}`}
               className="item submission-container"
             >
               <ul>
                 <li>{item.id}</li>
                 <li>{item.name}</li>
                 <li>{item.problemId}</li>
-                <li>{item.createdAt}</li>
+                <li>{item.createdAt}20230601</li>
                 <li
                   style={
                     item.status == "SOLVED"
