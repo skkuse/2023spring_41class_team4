@@ -20,6 +20,7 @@
 
 .item {
   padding: 20px 0;
+  border: none;
   border-bottom: 1px solid #505f98;
 }
 
@@ -42,6 +43,7 @@
   display: grid;
   grid-template-columns: 10% 20% 20% 30% 20%;
   padding: 0 5%;
+  /* border-color: blue; */
 }
 
 .submission-container li {
@@ -52,7 +54,7 @@
   height: 2rem;
   vertical-align: middle;
 }
-
+/* 
 .student-header {
   height: 2rem;
   background: #e7ecff;
@@ -74,4 +76,4 @@
   list-style: none;
   height: 2rem;
   vertical-align: middle;
-}
+} */

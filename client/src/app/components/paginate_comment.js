@@ -29,7 +29,7 @@ function Items({ currentItems }) {
                 <li>{item.id}</li>
                 <li>{item.name}</li>
                 <li>{item.problemId}</li>
-                <li>{item.createdAt}20230601</li>
+                <li>{item.createdAt}</li>
                 <li
                   style={
                     item.status == "SOLVED"

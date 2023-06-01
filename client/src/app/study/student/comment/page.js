@@ -40,16 +40,29 @@ export default function Comments() {
         });
       }
     }
-    getInfo();
+    async function dummy() {
+      data = [];
+      for (let i = 1; i < 30; i++) {
+        data.push({
+          id: i,
+          name: localStorage.CodemyName,
+          problemId: 1000+i,
+          createdAt: "2023-06-01",
+          status: make_status(i)
+        });
+      }
+    }
+    function make_status(i){
+      if (i%3===0){
+        return "COMMENTED";
+      }
+      else {
+        return "SOLVED";
+      }
+    }
+    // getInfo();
+    dummy();
   }, []);
-  // const data = [];
-  // for (let i = 1; i < 30; i++) {
-  //   data.push({
-  //     id: i,
-  //     title: "comment " + i,
-  //     date: " 2023-05-22",
-  //   });
-  // }
 
   return (
     <main>
