@@ -68,14 +68,28 @@ return 0;
   return (
     <main>
       <div className="student-status">
-        <h1>xxx 학생</h1>
+        <h1>{feedback && feedback.student.name} 학생</h1>
+        <div className="submission-information">
+          <div>
+            <label>제출 번호:</label> {feedback && feedback.id}
+          </div>
+          <div>
+            <label>문제 번호:</label> {feedback && feedback.problemId}
+          </div>
+          <div>
+            <label>제출 일자:</label> {feedback && feedback.createdAt}
+          </div>
+          <div>
+            <label>상태:</label> {feedback && feedback.status}
+          </div>
+        </div>
         <div className="flex-col">
           <div className="flex-col margin-top">
             <h1>Code</h1>
             <div>
               <CodeViwer
                 code={feedback && feedback.content}
-                language={"cpp"}
+                language={feedback && feedback.language}
               ></CodeViwer>
             </div>
           </div>
