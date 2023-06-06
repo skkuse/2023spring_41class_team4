@@ -9,7 +9,7 @@ export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [githubAccount, setGithubAccount] = useState("");
+  const [bojAccount, setBojAccount] = useState("");
   const [teacherCode, setTeacherCode] = useState("");
 
   const handleName = (e) => {
@@ -24,8 +24,8 @@ export default function Register() {
     setPassword(e.target.value);
   };
 
-  const handleGithubAccount = (e) => {
-    setGithubAccount(e.target.value);
+  const handleBojAccount = (e) => {
+    setBojAccount(e.target.value);
   };
 
   const handleTeacherCode = (e) => {
@@ -38,7 +38,7 @@ export default function Register() {
       name === "" ||
       email === "" ||
       password === "" ||
-      githubAccount == "" ||
+      bojAccount == "" ||
       teacherCode == ""
     ) {
       console.log("Lacking data");
@@ -50,7 +50,7 @@ export default function Register() {
           email: email,
           password: password,
           name: name,
-          githubAccount: githubAccount,
+          bojAccount: bojAccount,
           teacherCode: teacherCode,
         });
         console.log(response);
@@ -88,11 +88,11 @@ export default function Register() {
               placeholder="Password"
             />
             <input
-              onChange={handleGithubAccount}
+              onChange={handleBojAccount}
               className="input"
-              value={githubAccount}
+              value={bojAccount}
               type="text"
-              placeholder="Github ID"
+              placeholder="BOJ ID"
             />
             <input
               onChange={handleTeacherCode}
