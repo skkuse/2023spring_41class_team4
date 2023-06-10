@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 
 export default function Instructor() {
   const [userName, setUserName] = useState("");
+  const [teacherCode, setTeacherCode] = useState("");
   const now = dayjs();
   const labels = [];
   for (let i = 6; i >= 0; i--)
@@ -29,7 +30,18 @@ export default function Instructor() {
       });
       console.log(res.data);
     }
+    async function getInstructorInfo() {
+      const token = localStorage.getItem("Codemy");
+      const res = await axios.get("/api/teacher/me", {
+        headers: {
+          "X-Auth-Token": token,
+        },
+      });
+      console.log(res.data);
+      setTeacherCode(res.data.teacherCode);
+    }
     // getInfo();
+    getInstructorInfo();
   }, []);
 
   const options = {
@@ -139,7 +151,15 @@ export default function Instructor() {
 
   return (
     <main>
-      <h1 className="mb20">{userName} 강사</h1>
+      <div>
+        <h1
+          className="mb20"
+          style={{ display: "inline-block", marginRight: "20px" }}
+        >
+          {userName} 강사
+        </h1>
+        강사코드: {teacherCode}
+      </div>
       <div className="line"></div>
       <nav className="nav">
         <Link href="/study/instructor">Summary</Link>
