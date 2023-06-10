@@ -10,26 +10,46 @@ function Items({ currentItems }) {
   console.log(currentItems);
   return (
     <div className="items-container">
-        <table className="items-table">
-            <thead className="item-header">
-                <tr>
-                    <th style={{width: "8%"}} data-sort="int">#</th>
-                    <th style={{width: "12%"}} data-sort="int">문제 번호</th>
-                    <th style={{width: "20%"}} data-sort="string">제목</th>
-                    <th style={{width: "60%"}} data-sort="string">링크</th>
-                </tr>
-            </thead>
-            <tbody>
-                {currentItems.map((item,idx) => (
-                    <tr>
-                        <td>{item.id}</td>
-                        <td><Link href={`study/student/problem/${item.id}`}>{item.pNumber}</Link></td>
-                        <td><Link href={`study/student/problem/${item.id}`}>{item.title}</Link></td>
-                        <td><Link href={`study/student/problem/${item.id}`}>{item.link}</Link></td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+      <table className="items-table">
+        <thead className="item-header">
+          <tr>
+            <th style={{ width: "8%" }} data-sort="int">
+              #
+            </th>
+            <th style={{ width: "12%" }} data-sort="int">
+              문제 번호
+            </th>
+            <th style={{ width: "20%" }} data-sort="string">
+              제목
+            </th>
+            <th style={{ width: "60%" }} data-sort="string">
+              링크
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentItems.map((item, idx) => (
+            <tr>
+              <td>{item.id}</td>
+              <td>
+                <Link href={`study/student/problem/${item.id}`}>
+                  {item.pNumber}
+                </Link>
+              </td>
+              <td>
+                <Link href={`study/student/problem/${item.id}`}>
+                  {item.title}
+                </Link>
+              </td>
+              <td>
+                <Link href={`study/student/problem/${item.id}`}>
+                  {item.link}
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -60,6 +80,7 @@ export default function PaginatedItems({ itemsPerPage, data }) {
     <div id="container">
       <Items currentItems={currentItems} />
       <ReactPaginate
+        className="prob-paginate"
         breakLabel="..."
         nextLabel="next >"
         onPageChange={handlePageClick}
