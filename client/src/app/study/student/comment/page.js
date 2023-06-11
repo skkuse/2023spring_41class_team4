@@ -10,12 +10,13 @@ var itemsPerPage;
 var data=[];
 
 export default function Comments() {
+  const [commentList, setCommentList] = useState([]);
 
   useEffect(() => {
     async function getInfo() {
-      const res = await axios.get("/api/submissions", {
-        headers: {
-          "X-Auth-Token": localStorage.Codemy,
+    const res = await axios.get("/api/submissions", {
+      headers: {
+        "X-Auth-Token": localStorage.Codemy,
         },
       });
       console.log("debug");
@@ -26,19 +27,21 @@ export default function Comments() {
       // currentpage
       // pageSize
       // numberOfElements
-      data = [];
-      for (let i = 0; i < pageInfo.numberOfElements; i++) {
-        let submission = res.data.submissions[i];
-        console.log("submission");
-        console.log(submission);
-        data.push({
-          id: i+1,
-          name: localStorage.CodemyName,
-          problemId: submission.problemId,
-          createdAt: submission.createdAt,
-          status: submission.status,
-        });
-      }
+      setCommentList(res.data.submissions)
+
+      // data = [];
+      // for (let i = 0; i < pageInfo.numberOfElements; i++) {
+      //   let submission = res.data.submissions[i];
+      //   console.log("submission");
+      //   console.log(submission);
+      //   data.push({
+      //     id: i+1,
+      //     name: localStorage.CodemyName,
+      //     problemId: submission.problemId,
+      //     createdAt: submission.createdAt,
+      //     status: submission.status,
+      //   });
+      // }
     }
     async function dummy() {
       data = [];
