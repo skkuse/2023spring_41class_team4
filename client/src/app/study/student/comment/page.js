@@ -60,8 +60,8 @@ export default function Comments() {
         return "SOLVED";
       }
     }
-    // getInfo();
-    dummy();
+    getInfo();
+    // dummy();
   }, []);
 
   return (
