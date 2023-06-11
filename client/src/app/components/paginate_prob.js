@@ -30,10 +30,10 @@ function Items({ currentItems }) {
         <tbody>
           {currentItems.map((item, idx) => (
             <tr>
-              <td>{item.id}</td>
+              <td>{idx+1}</td>
               <td>
                 <Link href={`study/student/problem/${item.id}`}>
-                  {item.pNumber}
+                  {item.id}
                 </Link>
               </td>
               <td>
