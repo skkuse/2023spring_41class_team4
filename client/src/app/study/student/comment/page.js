@@ -28,20 +28,6 @@ export default function Comments() {
       // pageSize
       // numberOfElements
       setCommentList(res.data.submissions)
-
-      // data = [];
-      // for (let i = 0; i < pageInfo.numberOfElements; i++) {
-      //   let submission = res.data.submissions[i];
-      //   console.log("submission");
-      //   console.log(submission);
-      //   data.push({
-      //     id: i+1,
-      //     name: localStorage.CodemyName,
-      //     problemId: submission.problemId,
-      //     createdAt: submission.createdAt,
-      //     status: submission.status,
-      //   });
-      // }
     }
     async function dummy() {
       data = [];
@@ -77,7 +63,7 @@ export default function Comments() {
         <Link href="/study/student/comment">Comment</Link>
       </nav>
       <div className="line"></div>
-      <Pagination itemsPerPage={10} data={data}></Pagination>
+      <Pagination itemsPerPage={10} data={commentList}></Pagination>
     </main>
   );
 }

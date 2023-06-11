@@ -59,7 +59,7 @@ export default function Me() {
         <div className="me-content">
           <ul>
             <li id="noOfProblem">문제 개수 : {problemInfo.numberOfElements}</li>
-            <li id="noOfComment">코멘트 개수 : {problemInfo.numberOfElements}</li>
+            <li id="noOfComment">코멘트 개수 : {commentInfo.numberOfElements}</li>
           </ul>
         </div>
       </div>
