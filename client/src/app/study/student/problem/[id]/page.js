@@ -64,6 +64,7 @@ export default function ProblemItem({ params }) {
       )
       .then((response) => {
         console.log(response.data);
+        alert("제출이 완료되었습니다!");
       })
       .catch((err) => {
         console.error(err);
