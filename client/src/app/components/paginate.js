@@ -7,6 +7,7 @@ import "./paginate.css";
 // Example items, to simulate fetching from another resources.
 
 function SubmissionItems({ currentItems }) {
+  currentItems.reverse();
   return (
     <div style={{ width: "100%", marginTop: "2rem" }}>
       <header className="submission-header submission-container">
@@ -48,6 +49,7 @@ function SubmissionItems({ currentItems }) {
 }
 
 function StudentItems({ currentItems }) {
+  currentItems.reverse();
   return (
     <div style={{ width: "100%", marginTop: "2rem" }}>
       <header className="student-header student-container">
@@ -60,7 +62,10 @@ function StudentItems({ currentItems }) {
         {currentItems &&
           currentItems.map((item) => (
             <Link
-              href={`/study/instructor/student/${item.id}`}
+              href={{
+                pathname: `/study/instructor/student/${item.id}`,
+                query: { name: item.name },
+              }}
               className="item student-container"
             >
               <ul>
@@ -82,6 +87,7 @@ export default function PaginatedItems({ itemsPerPage, data, listItemOption }) {
   // Simulate fetching items from another resources.
   // (This could be items from props; or items loaded in a local state
   // from an API endpoint with useEffect and useState)
+  console.log(data);
   const endOffset = itemOffset + itemsPerPage;
   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = data.slice(itemOffset, endOffset);
