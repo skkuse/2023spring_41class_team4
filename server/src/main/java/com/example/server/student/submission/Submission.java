@@ -33,6 +33,7 @@ public class Submission extends TimeEntity {
 
     private String language;
 
+    @Column(length = 10000)
     private String code;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
