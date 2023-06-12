@@ -32,7 +32,7 @@ function SubmissionItems({ currentItems }) {
                 <li>{item.createdAt}</li>
                 <li
                   style={
-                    item.status == "SOLVED"
+                    item.status == "SOLVE"
                       ? { color: "#e74c3c" }
                       : { color: "#009874" }
                   }
