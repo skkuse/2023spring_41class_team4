@@ -14,6 +14,7 @@ public class Feedback {
     @Column(name = "feedback_id")
     private Long id;
 
+    @Column(length = 10000)
     private String overview;
 
     @Embedded

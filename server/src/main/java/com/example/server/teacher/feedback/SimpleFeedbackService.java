@@ -1,6 +1,7 @@
 package com.example.server.teacher.feedback;
 
 import com.example.server.student.submission.Submission;
+import com.example.server.student.submission.SubmissionRepository;
 import com.example.server.teacher.feedback.dto.OpenAiAPIResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,10 +33,11 @@ public class SimpleFeedbackService implements FeedbackService {
     private String apiKey;
 
     private final FeedbackRepository feedbackRepository;
+    private final SubmissionRepository submissionRepository;
 
     @Async("threadPoolTaskExecutor")
     @Override
-    public CompletableFuture<Feedback> requestFeedback(Submission submission) {
+    public void requestFeedback(Submission submission) {
         final String code = submission.getCode();
 
         final String overview = openAiResponse(code + "이 코드에 대해 피드백해줘");
@@ -55,18 +57,23 @@ public class SimpleFeedbackService implements FeedbackService {
 
         log.info("Problem Achievement Response: {}", achievement);
 
-        return CompletableFuture.completedFuture(new Feedback(overview, parseFromAchievement(achievement)));
+        final Feedback feedback = feedbackRepository.save(new Feedback(overview, parseFromAchievement(achievement)));
+
+        submission.feedback(feedback);
+        submissionRepository.save(submission);
     }
 
     private Achievement parseFromAchievement(String achievement) {
         final String[] strings = achievement.split("\n");
 
-        final int efficiency = Integer.parseInt(strings[0].split(":")[1]);
-        final int readability = Integer.parseInt(strings[1].split(":")[1]);
-        final int correctness = Integer.parseInt(strings[2].split(":")[1]);
-        final int scalability = Integer.parseInt(strings[3].split(":")[1]);
-        final int modularity = Integer.parseInt(strings[4].split(":")[1]);
-        final int security = Integer.parseInt(strings[5].split(":")[1]);
+        final int efficiency = Integer.parseInt(strings[0].split(":")[1].trim());
+        final int readability = Integer.parseInt(strings[1].split(":")[1].trim());
+        final int correctness = Integer.parseInt(strings[2].split(":")[1].trim());
+        final int scalability = Integer.parseInt(strings[3].split(":")[1].trim());
+        final int modularity = Integer.parseInt(strings[4].split(":")[1].trim());
+        final int security = Integer.parseInt(strings[5].split(":")[1].trim());
+
+
 
         return new Achievement(efficiency, readability, correctness, scalability, modularity, security);
     }

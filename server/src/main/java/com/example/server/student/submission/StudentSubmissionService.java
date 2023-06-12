@@ -7,14 +7,11 @@ import com.example.server.student.problem.SuggestedProblem;
 import com.example.server.student.problem.SuggestedProblemRepository;
 import com.example.server.student.submission.dto.SubmissionListResponse;
 import com.example.server.student.submission.dto.SubmissionResponse;
-import com.example.server.teacher.feedback.Feedback;
 import com.example.server.teacher.feedback.FeedbackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.concurrent.CompletableFuture;
 
 @Service
 @Transactional
@@ -29,11 +26,11 @@ public class StudentSubmissionService {
         SuggestedProblem suggestedProblem = suggestedProblemRepository.findByStudentIdAndProblemId(studentId, problemId)
                 .orElseThrow(() -> new NoProblemException(problemId));
 
-        Submission submission = submissionRepository.save(new Submission(suggestedProblem.getStudent(), suggestedProblem.getProblem(), language, content));
+        Submission submission = submissionRepository.save(
+                new Submission(suggestedProblem.getStudent(), suggestedProblem.getProblem(), language, content));
         suggestedProblemRepository.delete(suggestedProblem);
-        final CompletableFuture<Feedback> feedbackResult = feedbackService.requestFeedback(submission);
 
-        feedbackResult.thenAccept(submission::feedback);
+        feedbackService.requestFeedback(submission);
 
         return submission;
     }
