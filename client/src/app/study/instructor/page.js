@@ -10,6 +10,16 @@ import { useState, useEffect } from "react";
 export default function Instructor() {
   const [userName, setUserName] = useState("");
   const [teacherCode, setTeacherCode] = useState("");
+  const [dateCount, setDateCount] = useState([
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+  ]);
+  const [problemCount, setProblemCount] = useState([]);
   const now = dayjs();
   const labels = [];
   for (let i = 6; i >= 0; i--)
@@ -28,7 +38,58 @@ export default function Instructor() {
           "X-Auth-Token": token,
         },
       });
-      console.log(res.data);
+      const submissions = res.data.submissions;
+      let _dateCount = [
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+      ];
+      let _problemCount = {};
+      console.log(submissions);
+      for (let i = 0; i < submissions.length; i++) {
+        const date = dayjs(submissions[i].createdAt).format("YYYY-MM-DD");
+        const status = submissions[i].status;
+        for (let j = 0; j < 7; j++) {
+          if (date === labels[j]) {
+            if (status === "SOLVE") {
+              _dateCount[j][0]++;
+            } else {
+              _dateCount[j][1]++;
+            }
+            break;
+          }
+        }
+      }
+      setDateCount(_dateCount);
+      for (let i = 0; i < submissions.length; i++) {
+        const problemId = submissions[i].problemId;
+        const status = submissions[i].status;
+        if (status === "SOLVE") {
+          if (_problemCount[problemId]) {
+            _problemCount[problemId][0]++;
+          } else {
+            _problemCount[problemId] = [1, 0];
+          }
+        } else {
+          if (_problemCount[problemId]) {
+            _problemCount[problemId][1]++;
+          } else {
+            _problemCount[problemId] = [0, 1];
+          }
+        }
+      }
+      let _sortedProblemCount = [];
+      for (let key in _problemCount) {
+        _sortedProblemCount.push([key, _problemCount[key]]);
+      }
+      _sortedProblemCount.sort(
+        (a, b) => b[1][0] + b[1][1] - (a[1][0] + a[1][1])
+      );
+      setProblemCount(_sortedProblemCount.slice(0, 7));
     }
     async function getInstructorInfo() {
       const token = localStorage.getItem("Codemy");
@@ -40,7 +101,7 @@ export default function Instructor() {
       console.log(res.data);
       setTeacherCode(res.data.teacherCode);
     }
-    // getInfo();
+    getInfo();
     getInstructorInfo();
   }, []);
 
@@ -63,21 +124,21 @@ export default function Instructor() {
     datasets: [
       {
         label: "Total",
-        data: [0, 4, 2, 7, 5, 4, 3],
+        data: dateCount.map((x) => x[0] + x[1]),
         fill: false,
         borderColor: "rgb(54, 162, 235)",
         tension: 0,
       },
       {
         label: "Solved",
-        data: [0, 2, 1, 4, 2, 3, 3],
+        data: dateCount.map((x) => x[0]),
         fill: false,
         borderColor: "rgb(255, 99, 132)",
         tension: 0,
       },
       {
         label: "Commented",
-        data: [0, 2, 1, 3, 3, 1, 0],
+        data: dateCount.map((x) => x[1]),
         fill: false,
         borderColor: "rgb(75, 192, 192)",
         tension: 0,
@@ -98,11 +159,11 @@ export default function Instructor() {
   };
 
   const barData = {
-    labels: ["1004", "2104", "1024", "21096", "7517", "3198", "22756"],
+    labels: problemCount.map((x) => x[0]),
     datasets: [
       {
         label: "Commented",
-        data: [4, 3, 2, 2, 1, 0, 1],
+        data: problemCount.map((x) => x[1][1]),
         backgroundColor: [
           "rgba(255, 99, 132, 0.6)",
           "rgba(255, 159, 64, 0.6)",
@@ -125,7 +186,7 @@ export default function Instructor() {
       },
       {
         label: "Solved",
-        data: [9, 6, 5, 3, 3, 2, 1],
+        data: problemCount.map((x) => x[1][0]),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(255, 159, 64, 0.2)",
