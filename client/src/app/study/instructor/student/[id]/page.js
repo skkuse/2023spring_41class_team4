@@ -2,20 +2,24 @@
 import Pagination from "@/app/components/paginate";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function StudentItem({ params }) {
+  let searchParams = useSearchParams();
   const [submissionList, setSubmissionList] = useState([]);
+
   useEffect(() => {
     async function getInfo() {
-      const res = await axios.get(
-        `/api/teacher/submissions/stduents/${params.id}`,
-        {
-          headers: {
-            "X-Auth-Token": "TEACHER1",
-          },
-        }
-      );
-      console.log(res.data);
+      const token = localStorage.getItem("Codemy");
+      const res = await axios.get(`/api/teacher/submissions`, {
+        headers: {
+          "X-Auth-Token": token,
+        },
+        params: {
+          studentId: params.id,
+        },
+      });
+      setSubmissionList(res.data.submissions);
     }
     function makeDummyData() {
       const data = [];
@@ -33,13 +37,13 @@ export default function StudentItem({ params }) {
       }
       setSubmissionList(data);
     }
-    // getInfo();
-    makeDummyData();
+    getInfo();
+    // makeDummyData();
   }, []);
 
   return (
     <main>
-      <h1 className="mb20">xxx학생 정보</h1>
+      <h1 className="mb20">{searchParams.get("name")} 학생 정보</h1>
       <h2>최근 제출 내역</h2>
       <Pagination
         itemsPerPage={5}

@@ -16,9 +16,10 @@ export default function Student() {
 
   useEffect(() => {
     async function getInfo() {
+      const token = localStorage.getItem("Codemy");
       const res = await axios.get("/api/teacher/students", {
         headers: {
-          "X-Auth-Token": "TEACHER1",
+          "X-Auth-Token": token,
         },
       });
       console.log(res.data);
@@ -34,8 +35,8 @@ export default function Student() {
       }
       setStudentList(data);
     }
-    // getInfo();
-    makeDummyData();
+    getInfo();
+    // makeDummyData();
   }, []);
 
   return (

@@ -11,12 +11,14 @@ export default function SubmissionItem({ params }) {
   useEffect(() => {
     Prism.highlightAll();
     async function getInfo() {
+      const token = localStorage.getItem("Codemy");
       const res = await axios.get(`/api/teacher/submissions/${params.id}`, {
         headers: {
-          "X-Auth-Token": "TEACHER1",
+          "X-Auth-Token": token,
         },
       });
       console.log(res.data);
+      setFeedback(res.data);
     }
     function makeDummyData() {
       const _feedback = {
@@ -58,8 +60,8 @@ return 0;
       setFeedback(_feedback);
       console.log(_feedback);
     }
-    // getInfo();
-    makeDummyData();
+    getInfo();
+    // makeDummyData();
   }, []);
 
   const labels = [
@@ -72,19 +74,25 @@ return 0;
   ];
 
   const submitCommentHandler = async () => {
-    await axios.get(
-      `/api/teacher/submissions/${params.id}/comment`,
-      {
-        headers: {
-          "X-Auth-Token": "TEACHER1",
-        },
-      },
-      {
-        body: {
+    await axios
+      .post(
+        `/api/teacher/submissions/${params.id}/comment`,
+        {
           content: comment,
         },
-      }
-    );
+        {
+          headers: {
+            "X-Auth-Token": "TEACHER1",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        alert("제출이 완료되었습니다!");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
