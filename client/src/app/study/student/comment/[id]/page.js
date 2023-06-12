@@ -6,16 +6,29 @@ import { useState, useEffect } from "react";
 import "./page.css";
 
 export default function SubmissionItem({ params }) {
-  const [feedback, setFeedback] = useState(null);
+  const [feedback, setFeedback] = useState({});
+  const [comment, setComment] = useState({});
+  const [defaultComment, setDefaultComment] = useState("");
+
+  useEffect(() => {
+    setDefaultComment("아직 코멘트가 등록되지 않았습니다.")
+  })
+
   useEffect(() => {
     Prism.highlightAll();
+    console.log("Hi");
     async function getInfo() {
-      const res = await axios.get(`/api/teacher/submissions/${params.id}`, {
-        headers: {
-          "X-Auth-Token": "TEACHER1",
-        },
-      });
-      console.log(res.data);
+      const res = await axios.get(
+        `/api/submissions/${params.id}`,
+        {
+          headers: {
+            "X-Auth-Token": localStorage.Codemy,
+          },
+        }
+        );
+        console.log(res.data);
+        setFeedback(res.data);
+        setComment(res.data.comment);
     }
     function makeDummyData() {
       const _feedback = {
@@ -52,8 +65,8 @@ return 0;
       setFeedback(_feedback);
       console.log(_feedback);
     }
-    // getInfo();
-    makeDummyData();
+    getInfo();
+    // makeDummyData();
   }, []);
 
   const labels = [
@@ -65,6 +78,21 @@ return 0;
     "security",
   ];
 
+  function getComment(status){
+    console.log(status);
+    if (status=="SOLVE"){
+      return "아직 코멘트가 등록되지 않았습니다.";
+    }
+    else{
+      if (comment){
+        return comment.content;
+      }
+      else{
+        return "Commented"
+      }
+    }
+  }
+
   return (
     <main>
       <div className="student-status">
@@ -75,54 +103,15 @@ return 0;
             <div>
               <CodeViwer
                 code={feedback && feedback.content}
-                language={"cpp"}
+                language={feedback && feedback.language}
               ></CodeViwer>
             </div>
           </div>
           <div className="flex-col margin-top">
-            <h1>ChatGPT Feedback</h1>
-            <div className="flex-row">
-              <div style={{ width: "300px", height: "300px" }}>
-                {feedback && (
-                  <Radar
-                    data={{
-                      labels: labels,
-                      datasets: [
-                        {
-                          label: "My First Dataset",
-                          data: labels.map(
-                            (x) => feedback.feedback.achievement[x]
-                          ),
-                          fill: true,
-                          backgroundColor: "rgba(255, 99, 132, 0.2)",
-                          borderColor: "rgb(255, 99, 132)",
-                          pointBackgroundColor: "rgb(255, 99, 132)",
-                          pointBorderColor: "#fff",
-                          pointHoverBackgroundColor: "#fff",
-                          pointHoverBorderColor: "rgb(255, 99, 132)",
-                        },
-                      ],
-                    }}
-                  ></Radar>
-                )}
-              </div>
-              <div className="feedback-container">
-                {feedback && feedback.feedback.overview}
-              </div>
-            </div>
-          </div>
-          <div className="flex-col margin-top">
             <h1>Comment</h1>
-            <textarea
-              className="mt10"
-              rows="10"
-              placeholder="comment"
-              style={{ padding: "20px 40px" }}
-            ></textarea>
-            <div className="submit-button-container">
-              {/* <button className="submit-button" type="button">
-                Submit
-              </button> */}
+            <div className="comment-container">
+              {feedback && getComment(feedback.status)}
+
             </div>
           </div>
         </div>

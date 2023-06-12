@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./page.css";
 import Pagination from "@/app/components/paginate_prob"
 
@@ -10,6 +10,8 @@ var data = [];
 var pageInfo;
 var itemsPerPage;
 export default function Problems() {
+  const [problemList, setProblemList] = useState([]);
+
   useEffect(() => {
     async function getInfo() {
       const res = await axios.get("/api/problems", {
@@ -21,21 +23,11 @@ export default function Problems() {
       console.log(res.data);
       pageInfo = res.data.pageInfo;
       itemsPerPage = pageInfo.pageSize;
+      setProblemList(res.data.problems)
       // totalPage
       // currentpage
       // pageSize
       // numberOfElements
-      data = []
-      for (let i = 0; i < pageInfo.numberOfElements; i++) {
-        let problem = res.data.problems[i];
-        console.log(problem);
-        data.push({
-          id: i+1,
-          pNumber: problem.id,
-          title: problem.title,
-          link: problem.link,
-        });
-      }
     }
     getInfo();
   }, []);
@@ -50,7 +42,7 @@ export default function Problems() {
       </nav>
       <div className="line"></div>
       <div className="gap"></div>
-      <Pagination itemsPerPage={itemsPerPage} data={data}></Pagination>
+      <Pagination itemsPerPage={10} data={problemList}></Pagination>
     </main>
   );
 }

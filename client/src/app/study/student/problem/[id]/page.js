@@ -8,24 +8,21 @@ import "./page.css";
 import Link from "next/link";
 
 export default function ProblemItem({ params }) {
-  const [problemId, setProblemId] = useState(0);
+  const [problem, setProblem] = useState([]);
 
   // 문제 정보 가져오기
   useEffect(() => {
     async function getInfo() {
-      const res = await axios.get("/api/problems", {
+      const res = await axios.get("/api/problems/"+params.id, {
         headers: {
           "X-Auth-Token": localStorage.Codemy,
         },
       });
-      let problem = res.data.problems[params.id - 1];
-      localStorage.setItem("problemId", problem.id);
-      document.getElementById("title").innerText = problem.title;
-      document.getElementById("problemNo").innerText = problem.id + "번";
-      document.getElementById("link").innerHTML =
-        "링크: <a href='" + problem.link + "'>" + problem.link + "</a>";
+      console.log(res.data)
+      setProblem(res.data);
     }
     getInfo();
+    console.log(problem);
   }, []);
 
   // codeMirror 기본 코드
@@ -52,7 +49,7 @@ export default function ProblemItem({ params }) {
     console.log(localStorage.Codemy);
     const res = await axios
       .post(
-        "/api/problems/" + localStorage.problemId + "/submit",
+        "/api/problems/" + problem.id + "/submit",
         {
           body: {
             language: "python3",
@@ -67,6 +64,7 @@ export default function ProblemItem({ params }) {
       )
       .then((response) => {
         console.log(response.data);
+        alert("제출이 완료되었습니다!");
       })
       .catch((err) => {
         console.error(err);
@@ -87,15 +85,19 @@ export default function ProblemItem({ params }) {
     <main>
       {/* <div>id : {params.id}</div> */}
       <div className="sub-title">
-        <h3 id="title"></h3>
+        <h2 id="title">{problem.title}</h2>
       </div>
       <div className="line"></div>
       <div className="description">
-        <p id="problemNo"></p>
-        <p id="link"></p>
+        <p id="problemId">문제 번호 : {problem.id}</p>
+        <p>
+          <Link href={String(problem.content)}>
+            <b>문제 풀러 가기</b>
+          </Link>
+        </p>
       </div>
       <div className="sub-title submit-container">
-        <h3>제출</h3>
+        <h2>제출</h2>
       </div>
       <div className="line"></div>
 

@@ -10,12 +10,13 @@ var itemsPerPage;
 var data=[];
 
 export default function Comments() {
+  const [commentList, setCommentList] = useState([]);
 
   useEffect(() => {
     async function getInfo() {
-      const res = await axios.get("/api/submissions", {
-        headers: {
-          "X-Auth-Token": localStorage.Codemy,
+    const res = await axios.get("/api/submissions", {
+      headers: {
+        "X-Auth-Token": localStorage.Codemy,
         },
       });
       console.log("debug");
@@ -26,19 +27,7 @@ export default function Comments() {
       // currentpage
       // pageSize
       // numberOfElements
-      data = [];
-      for (let i = 0; i < pageInfo.numberOfElements; i++) {
-        let submission = res.data.submissions[i];
-        console.log("submission");
-        console.log(submission);
-        data.push({
-          id: i+1,
-          name: localStorage.CodemyName,
-          problemId: submission.problemId,
-          createdAt: submission.createdAt,
-          status: submission.status,
-        });
-      }
+      setCommentList(res.data.submissions)
     }
     async function dummy() {
       data = [];
@@ -60,8 +49,8 @@ export default function Comments() {
         return "SOLVED";
       }
     }
-    // getInfo();
-    dummy();
+    getInfo();
+    // dummy();
   }, []);
 
   return (
@@ -74,7 +63,7 @@ export default function Comments() {
         <Link href="/study/student/comment">Comment</Link>
       </nav>
       <div className="line"></div>
-      <Pagination itemsPerPage={10} data={data}></Pagination>
+      <Pagination itemsPerPage={10} data={commentList}></Pagination>
     </main>
   );
 }

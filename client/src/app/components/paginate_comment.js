@@ -27,7 +27,7 @@ function Items({ currentItems }) {
             >
               <ul>
                 <li>{item.id}</li>
-                <li>{item.name}</li>
+                <li>{localStorage.CodemyName}</li>
                 <li>{item.problemId}</li>
                 <li>{item.createdAt}</li>
                 <li

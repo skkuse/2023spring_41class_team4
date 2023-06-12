@@ -27,8 +27,21 @@
     font-size: 1em;
     margin-top: 0.4em;
     margin-bottom: 0.4em;
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.description p{
+    margin-bottom: 0.4em;
 }
 
 .submit-container{
     margin-top: 50px;
+}
+
+.description-container{
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 8px;
 }

@@ -4,14 +4,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./page.css";
 
-export default function Problems() {
-  let id;
-  let name;
-  let email;
-  let teacher_id;
-  let teacher_name;
-  let noOfProblem;
-  let noOfComment;
+export default function Me() {
+  const [me, setMe] = useState([]);
+  const [teacher, setTeacher] = useState([]);
+  const [problemInfo, setProblemInfo] = useState([]);
+  const [commentInfo, setCommentInfo] = useState([]);
 
   useEffect(() => {
     async function getInfo() {
@@ -20,34 +17,20 @@ export default function Problems() {
           "X-Auth-Token": localStorage.Codemy,
         },
       });
-      id = res.data.id
-      name = res.data.name
-      email = res.data.email
-      teacher_id = res.data.teacher.id
-      teacher_name = res.data.teacher.name
-
-      document.getElementById("email").innerText = "이메일: " + email
-      document.getElementById("teacher-name").innerText = "담당 선생님: " + teacher_name
-      document.getElementById("teacher-id").innerText = "선생님 아이디: " + teacher_id
-      
+      setMe(res.data);
+      setTeacher(res.data.teacher);
       const res2 = await axios.get("/api/problems", {
         headers: {
           "X-Auth-Token": localStorage.Codemy,
         },
       });
-      localStorage.setItem("noOfProblem",res2.data.pageInfo.numberOfElements)
-      noOfProblem = res2.data.pageInfo.numberOfElements
-      document.getElementById("noOfProblem").innerText = "추천받은 문제 수: " + noOfProblem
-      
-      
+      setProblemInfo(res2.data.pageInfo);
       const res3 = await axios.get("/api/submissions", {
         headers: {
           "X-Auth-Token": localStorage.Codemy,
         },
       });
-      localStorage.setItem("noOfComment",res3.data.pageInfo.numberOfElements)
-      noOfComment = res3.data.pageInfo.numberOfElements
-      document.getElementById("noOfComment").innerText = "코멘트 수: " + noOfComment
+      setCommentInfo(res3.data.pageInfo);
     }
     getInfo();
   }, []);
@@ -67,16 +50,16 @@ export default function Problems() {
         <p className="me-title"><b>내 정보</b></p>
         <div className="me-content">
           <ul>
-            <li id="email"></li>
-            <li id="teacher-name"></li>
-            <li id="teacher-id"></li>
+            <li id="email">이메일 : {me.email}</li>
+            <li id="teacher-name">선생님 : {teacher.name}</li>
+            <li id="teacher-id">선생님 아이디 : {teacher.id}</li>
           </ul>
         </div>
         <p className="me-title"><b>푼 문제</b></p>
         <div className="me-content">
           <ul>
-            <li id="noOfProblem"></li>
-            <li id="noOfComment"></li>
+            <li id="noOfProblem">문제 개수 : {problemInfo.numberOfElements}</li>
+            <li id="noOfComment">코멘트 개수 : {commentInfo.numberOfElements}</li>
           </ul>
         </div>
       </div>
