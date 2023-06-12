@@ -57,7 +57,6 @@ public class Submission extends TimeEntity {
 
     public void feedback(Feedback feedback) {
         this.feedback = feedback;
-        this.status = SubmissionStatus.FEEDBACK;
     }
 
     public void comment(Comment comment) {
