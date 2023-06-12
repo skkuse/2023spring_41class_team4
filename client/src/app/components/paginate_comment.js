@@ -32,7 +32,7 @@ function Items({ currentItems }) {
                 <li>{item.createdAt}</li>
                 <li
                   style={
-                    item.status == "SOLVED"
+                    item.status == "SOLVE"
                       ? { color: "#e74c3c" }
                       : { color: "#009874" }
                   }
@@ -47,7 +47,7 @@ function Items({ currentItems }) {
   );
 }
 
-export default function PaginatedItems({ itemsPerPage, data}) {
+export default function PaginatedItems({ itemsPerPage, data }) {
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
@@ -71,7 +71,7 @@ export default function PaginatedItems({ itemsPerPage, data}) {
 
   return (
     <div id="container">
-      <Items currentItems={currentItems}/>
+      <Items currentItems={currentItems} />
       <ReactPaginate
         className="paginate"
         breakLabel="..."
