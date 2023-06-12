@@ -13,12 +13,12 @@ export default function ProblemItem({ params }) {
   // 문제 정보 가져오기
   useEffect(() => {
     async function getInfo() {
-      const res = await axios.get("/api/problems/"+params.id, {
+      const res = await axios.get("/api/problems/" + params.id, {
         headers: {
           "X-Auth-Token": localStorage.Codemy,
         },
       });
-      console.log(res.data)
+      console.log(res.data);
       setProblem(res.data);
     }
     getInfo();
@@ -47,14 +47,13 @@ export default function ProblemItem({ params }) {
   const runCode = async () => {
     // 제출버튼을 누르면 axios를 통해 서버로 코드데이터가 넘어간다.
     console.log(localStorage.Codemy);
+    console.log(code);
     const res = await axios
       .post(
         "/api/problems/" + problem.id + "/submit",
         {
-          body: {
-            language: "python3",
-            content: code,
-          },
+          language: "python3",
+          content: code,
         },
         {
           headers: {
@@ -63,7 +62,7 @@ export default function ProblemItem({ params }) {
         }
       )
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
         alert("제출이 완료되었습니다!");
       })
       .catch((err) => {
