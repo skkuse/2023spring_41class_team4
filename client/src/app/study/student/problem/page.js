@@ -3,8 +3,7 @@ import Link from "next/link";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./page.css";
-import Pagination from "@/app/components/paginate_prob"
-
+import Pagination from "@/app/components/paginate_prob";
 
 var data = [];
 var pageInfo;
@@ -23,7 +22,7 @@ export default function Problems() {
       console.log(res.data);
       pageInfo = res.data.pageInfo;
       itemsPerPage = pageInfo.pageSize;
-      setProblemList(res.data.problems)
+      setProblemList(res.data.problems);
       // totalPage
       // currentpage
       // pageSize
@@ -33,7 +32,7 @@ export default function Problems() {
   }, []);
   return (
     <main>
-      <h1>{localStorage.CodemyName} 학생</h1>
+      <h1 className="mb20">{localStorage.CodemyName} 학생</h1>
       <div className="line"></div>
       <nav className="nav">
         <Link href="/study/student">me</Link>

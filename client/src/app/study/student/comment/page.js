@@ -1,22 +1,22 @@
 "use client";
 import Link from "next/link";
 import axios from "axios";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Pagination from "@/app/components/paginate_comment";
 import "./page.css";
 
 var pageInfo;
 var itemsPerPage;
-var data=[];
+var data = [];
 
 export default function Comments() {
   const [commentList, setCommentList] = useState([]);
 
   useEffect(() => {
     async function getInfo() {
-    const res = await axios.get("/api/submissions", {
-      headers: {
-        "X-Auth-Token": localStorage.Codemy,
+      const res = await axios.get("/api/submissions", {
+        headers: {
+          "X-Auth-Token": localStorage.Codemy,
         },
       });
       console.log("debug");
@@ -27,7 +27,7 @@ export default function Comments() {
       // currentpage
       // pageSize
       // numberOfElements
-      setCommentList(res.data.submissions)
+      setCommentList(res.data.submissions);
     }
     async function dummy() {
       data = [];
@@ -35,17 +35,16 @@ export default function Comments() {
         data.push({
           id: i,
           name: localStorage.CodemyName,
-          problemId: 1000+i,
+          problemId: 1000 + i,
           createdAt: "2023-06-01",
-          status: make_status(i)
+          status: make_status(i),
         });
       }
     }
-    function make_status(i){
-      if (i%3===0){
+    function make_status(i) {
+      if (i % 3 === 0) {
         return "COMMENTED";
-      }
-      else {
+      } else {
         return "SOLVED";
       }
     }
@@ -55,8 +54,8 @@ export default function Comments() {
 
   return (
     <main>
-      <h1>{localStorage.CodemyName} 학생</h1>
-      <div className="line"></div>      
+      <h1 className="mb20">{localStorage.CodemyName} 학생</h1>
+      <div className="line"></div>
       <nav className="nav">
         <Link href="/study/student">me</Link>
         <Link href="/study/student/problem">Problem</Link>

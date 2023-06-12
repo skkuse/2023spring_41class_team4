@@ -34,10 +34,12 @@ export default function Me() {
     }
     getInfo();
   }, []);
-  
+
   return (
     <main>
-      <h1 id="student-title">{localStorage.CodemyName} 학생</h1>
+      <h1 id="student-title" className="mb20">
+        {localStorage.CodemyName} 학생
+      </h1>
       <div className="line"></div>
       <nav className="nav">
         <Link href="/study/student">me</Link>
@@ -47,7 +49,9 @@ export default function Me() {
       <div className="line"></div>
       <div className="gap"></div>
       <div className="me-container">
-        <p className="me-title"><b>내 정보</b></p>
+        <p className="me-title">
+          <b>내 정보</b>
+        </p>
         <div className="me-content">
           <ul>
             <li id="email">이메일 : {me.email}</li>
@@ -55,11 +59,15 @@ export default function Me() {
             <li id="teacher-id">선생님 아이디 : {teacher.id}</li>
           </ul>
         </div>
-        <p className="me-title"><b>푼 문제</b></p>
+        <p className="me-title">
+          <b>푼 문제</b>
+        </p>
         <div className="me-content">
           <ul>
             <li id="noOfProblem">문제 개수 : {problemInfo.numberOfElements}</li>
-            <li id="noOfComment">코멘트 개수 : {commentInfo.numberOfElements}</li>
+            <li id="noOfComment">
+              코멘트 개수 : {commentInfo.numberOfElements}
+            </li>
           </ul>
         </div>
       </div>
